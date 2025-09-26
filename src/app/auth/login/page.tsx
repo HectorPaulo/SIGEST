@@ -103,7 +103,7 @@ const PageContent: React.FC = () => {
                                     </label>
                                     <motion.input
                                         id="email"
-                                        className="border p-3 shadow-md dark:text-black dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
+                                        className="border p-3 shadow-md dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
                                         type="text"
                                         value={username}
                                         onChange={handleUsernameChange}
@@ -120,7 +120,7 @@ const PageContent: React.FC = () => {
                                     </label>
                                     <motion.input
                                         id="password"
-                                        className="border p-3 shadow-md dark:text-black dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
+                                        className="border p-3 shadow-md  dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
                                         value={password}
                                         onChange={handlePasswordChange}
                                         type="password"

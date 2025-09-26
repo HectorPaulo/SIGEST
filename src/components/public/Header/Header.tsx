@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     return (
         <header className="flex flex-wrap justify-between items-center mt-4 sm:ml-20 sm:flex-columns pr-4 sm:pr-8">
             <Link href='/public/inicio'>
-                <Image src="/assets/institucional/logo.png" alt="Logo Universidad" width={80} height={100} className="sm:h-20 sm:w-18" />
+                <Image src={`/assets/institucional/${theme === 'light' ? 'logo' : 'logo-bn'}.png`} alt="Logo Universidad" width={80} height={100} className={ theme === 'light' ? 'sm:h-20 sm:w-18' : 'sm:h-18 sm:w-20'} />
             </Link>
             <nav className="flex flex-wrap space-x-2 sm:space-x-4 justify-center items-center mt-4 sm:mt-0">
                 <button onClick={toggleTheme} className="cursor-pointer hover:scale-105 hover:animate-pulse">
