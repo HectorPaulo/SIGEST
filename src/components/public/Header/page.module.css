@@ -1,0 +1,105 @@
+.brutalistButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 150px;
+    height: 40px;
+    /* background-color: #1b1878; */
+    background-color: rgb(30 64 175 / var(--tw-text-opacity, 1));
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border: 3px solid #fff;
+    outline: 3px solid rgb(30 64 175 / var(--tw-text-opacity, 1));
+    box-shadow: 6px 6px 0 #00a4ef;
+    transition: all 0.1s ease-out;
+    padding: 0 15px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutalistButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8),
+            transparent
+    );
+    z-index: 1;
+    transition: none;
+    opacity: 0;
+}
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.brutalistButton:hover::before {
+    opacity: 1;
+    animation: slide 2s infinite;
+}
+
+.brutalistButton:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 #117118;
+    background-color: #117118;
+    color: #fff;
+}
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.brutalistButton:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0 #00a4ef;
+    background-color: #fff;
+    color: #1b1878;
+    border-color: #000;
+}
+
+.buttonText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    transition: transform 0.2s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+.brutalistButton:hover .button-text {
+    transform: skew(-5deg);
+}
+
+.brutalistButton:active .button-text {
+    transform: skew(5deg);
+}
+
+.buttonText span:first-child {
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.buttonText span:last-child {
+    font-size: 12px;
+    text-transform: uppercase;
+}

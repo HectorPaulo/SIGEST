@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+    images: {
+        domains: [
+            'getillustrations.b-cdn.net',
+            'www.manageengine.com',
+        ],
+    },
 };
 
 export default nextConfig;
