@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/utils/context/ThemeContext/ThemeContext";
 import { UserProvider } from "@/utils/context/UserContext/UserContext";
+import DialogsProvider from "@/hooks/useDialogs/DialogsProvider";
+import NotificationsProvider from "@/hooks/useNotifications/NotificationsProvider";
 // Importar configuración de axios
 import "@/lib/axios";
 
@@ -33,7 +35,11 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <UserProvider>
-            {children}
+            <NotificationsProvider>
+              <DialogsProvider>
+                {children}
+              </DialogsProvider>
+            </NotificationsProvider>
           </UserProvider>
         </ThemeProvider>
       </body>

@@ -15,15 +15,16 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
+import {useRouter} from "next/navigation";
 
 const mainListItems = [
-    { text: 'Inicio', icon: <HomeRoundedIcon /> },
-    { text: 'Bitácora', icon: <FolderOpenIcon /> },
-    { text: 'Empleados', icon: <AssignmentIndIcon /> },
-    { text: 'Areas', icon: <ApartmentRoundedIcon /> },
-    { text: 'Inventario', icon: <Inventory2RoundedIcon /> },
-    { text: 'Vales', icon: <ReceiptLongRoundedIcon /> },
-    { text: 'Usuarios', icon: <SupervisedUserCircleRoundedIcon /> },
+    { text: 'Inicio', icon: <HomeRoundedIcon />, route: '/private/dashboard'},
+    { text: 'Bitácora', icon: <FolderOpenIcon />, route: '/private/bitacora' },
+    { text: 'Empleados', icon: <AssignmentIndIcon />, route: '/private/empleados' },
+    { text: 'areas', icon: <ApartmentRoundedIcon />, route: '/private/areas' },
+    { text: 'Inventario', icon: <Inventory2RoundedIcon />, route: '/private/inventario' },
+    { text: 'Vales', icon: <ReceiptLongRoundedIcon />, route: '/private/vales' },
+    { text: 'Usuarios', icon: <SupervisedUserCircleRoundedIcon />, route: '/private/usuarios' },
 ];
 
 const secondaryListItems = [
@@ -33,12 +34,16 @@ const secondaryListItems = [
 ];
 
 export default function MenuContent() {
+    const router = useRouter();
     return (
         <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
             <List dense>
                 {mainListItems.map((item, index) => (
                     <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton selected={index === 0}>
+                        <ListItemButton
+                            selected={index === 0}
+                            onClick={() => router.push(item.route)}
+                        >
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItemButton>

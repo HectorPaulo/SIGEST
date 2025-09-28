@@ -32,7 +32,7 @@ function PageContent(props: { disableCustomTheme?: boolean }) {
             <Box sx={{ display: 'flex' }}>
                 <SideMenu />
                 <AppNavbar />
-                {/* Main content */}
+                {/*Contenido Principal*/}
                 <Box
                     component="main"
                     sx={(theme) => ({

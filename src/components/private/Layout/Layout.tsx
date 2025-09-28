@@ -1,54 +1,99 @@
 "use client";
 
-import React, { ReactNode, useState } from 'react';
-import { Sidebar } from '../Sidebar/Sidebar';
-import { useMediaQuery } from 'usehooks-ts';
-import ProtectedRoute from "@/utils/ProtectedRoutes/ProtectedRoutes";
-import {ThemeProvider} from "@/utils/context/ThemeContext/ThemeContext";
+                                import React, { ReactNode, useRef, useState, useCallback } from "react";
+                                import { useTheme } from "@mui/material/styles";
+                                import useMediaQuery from "@mui/material/useMediaQuery";
+                                import Box from "@mui/material/Box";
+                                import Toolbar from "@mui/material/Toolbar";
+                                import ProtectedRoute from "@/utils/ProtectedRoutes/ProtectedRoutes";
+                                import { ThemeProvider } from "@/utils/context/ThemeContext/ThemeContext";
+import UpnIcon from "@/components/private/UpnIcon/UpnIcon";
+import {Sidebar} from "@/components/private/Sidebar/Sidebar";
+import Header from "@/components/private/Header/Header";
 
-interface DashboardLayoutProps {
-    children: ReactNode;
-}
+                                interface DashboardLayoutProps {
+                                  children: ReactNode;
+                                }
 
-const Layout: React.FC<DashboardLayoutProps> = ({ children }) => {
-    const isDesktop = useMediaQuery('(min-width: 800px)', {
-        initializeWithValue: false,
-    });
+                                const Layout: React.FC<DashboardLayoutProps> = ({ children }) => {
+                                  const theme = useTheme();
+                                  const layoutRef = useRef<HTMLDivElement>(null);
 
-    const [sidebarVisible, setSidebarVisible] = useState(false);
+                                  const [isDesktopNavigationExpanded, setIsDesktopNavigationExpanded] = useState(true);
+                                  const [isMobileNavigationExpanded, setIsMobileNavigationExpanded] = useState(false);
 
-    return (
-        <ThemeProvider>
-            <ProtectedRoute>
-                <div className="flex flex-col min-h-screen">
-                    <div className="flex flex-1">
-                        {isDesktop && (
-                            <>
-                                <Sidebar onSidebarToggle={setSidebarVisible} />
-                                {/* El contenido se ajusta según la visibilidad del sidebar */}
-                                <div
-                                    className="flex-1 transition-transform duration-200"
-                                    style={{
-                                        width: '100%',
-                                        transform: `translateX(${sidebarVisible ? 260 : 16}px)`,
-                                        transition: 'transform 0.2s cubic-bezier(0.4,0,0.2,1)',
-                                    }}
-                                >
-                                    <main>{children}</main>
-                                </div>
-                            </>
-                        )}
-                        {!isDesktop && (
-                            <div className="flex-1">
-                                <main>{children}</main>
-                            </div>
-                        )}
-                    </div>
-                </div>
-                {!isDesktop && <Sidebar />}
-            </ProtectedRoute>
-        </ThemeProvider>
-    );
-};
+                                  const isOverMdViewport = useMediaQuery(theme.breakpoints.up("md"));
+                                  const isNavigationExpanded = isOverMdViewport
+                                    ? isDesktopNavigationExpanded
+                                    : isMobileNavigationExpanded;
 
-export default Layout;
+                                  const setIsNavigationExpanded = useCallback(
+                                    (newExpanded: boolean) => {
+                                      if (isOverMdViewport) {
+                                        setIsDesktopNavigationExpanded(newExpanded);
+                                      } else {
+                                        setIsMobileNavigationExpanded(newExpanded);
+                                      }
+                                    },
+                                    [isOverMdViewport]
+                                  );
+
+                                  const handleToggleHeaderMenu = useCallback(
+                                    (isExpanded: boolean) => {
+                                      setIsNavigationExpanded(isExpanded);
+                                    },
+                                    [setIsNavigationExpanded]
+                                  );
+
+                                  return (
+                                    <ThemeProvider>
+                                      <ProtectedRoute>
+                                        <Box
+                                          ref={layoutRef}
+                                          sx={{
+                                            position: "relative",
+                                            display: "flex",
+                                            overflow: "hidden",
+                                            minHeight: "100vh",
+                                            width: "100%",
+                                          }}
+                                        >
+                                          <Header
+                                            logo={<UpnIcon />}
+                                            title=""
+                                            menuOpen={isNavigationExpanded}
+                                            onToggleMenu={handleToggleHeaderMenu}
+                                          />
+                                          <Sidebar
+                                            // expanded={isNavigationExpanded}
+                                            // setExpanded={setIsNavigationExpanded}
+                                            // container={layoutRef.current ?? undefined}
+                                          />
+                                          <Box
+                                            sx={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              flex: 1,
+                                              minWidth: 0,
+                                            }}
+                                          >
+                                            <Toolbar sx={{ displayPrint: "none" }} />
+                                            <Box
+                                              component="main"
+                                              sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                flex: 1,
+                                                overflow: "auto",
+                                              }}
+                                            >
+                                              {children}
+                                            </Box>
+                                          </Box>
+                                        </Box>
+                                      </ProtectedRoute>
+                                    </ThemeProvider>
+                                  );
+                                };
+
+                                export default Layout;

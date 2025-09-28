@@ -6,7 +6,7 @@ import {Empleado, EmpleadoInsert} from "@/types/empleado";
 // Función para crear un área
 
 export const CreateEmpleado = async (data: EmpleadoInsert) => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/employee/create`, data);
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/employee/create`, data);
     return response.data;
 };
 
@@ -18,7 +18,7 @@ export const UpdateEmpleado = async (id: number, data: Empleado) => {
 
 // Función para obtener todas las áreas
 export const GetAllEmpleados = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/employee/find-all`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/employee/find-all`);
     return response.data;
 };
 

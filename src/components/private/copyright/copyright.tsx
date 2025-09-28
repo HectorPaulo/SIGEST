@@ -16,9 +16,9 @@ export default function Copyright(props: any) {
                 ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
             ]}
         >
-            {'Copyright © '}
+            {'Todos los derechos resevados © '}
             <Link color="inherit" href="https://mui.com/">
-                Sitemark
+                Upn 201
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

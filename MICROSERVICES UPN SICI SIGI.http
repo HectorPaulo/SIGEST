@@ -1,0 +1,303 @@
+# MICROSERVICES UPN SICI SIGI
+
+###
+# group: AUTH
+# @name Login
+POST localhost:8072/upn201/gatewayserver/api/keycloak/auth/login
+Content-Type: application/json
+
+{
+  "username": "devpaulo",
+  "password": "1234"
+}
+
+###
+# group: AUTH
+# @name Logout
+POST localhost:8072/upn201/gatewayserver/api/keycloak/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3NzMzMDExNy0zMzdmLTQ1OWUtODdiZC0zNTY3MzdmZGYxMGMifQ.eyJleHAiOjE3NDU5NDE4MTEsImlhdCI6MTc0NTk0MDAxMSwianRpIjoiNjQ5N2MxNmItOWM2Ni00YzMxLTkwYTItM2QwMDA4ZDBiMDMzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2Iiwic3ViIjoiZDRiOTllMGEtOTM4Zi00YmExLTk2YzMtNWNjZDg2Y2I0OWY5IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6InVwbjIwMSIsInNpZCI6ImJmYzc1ZjEzLTU2ZGItNGJlZi1hNzkzLTkzY2YxZGFhYWRiNSIsInNjb3BlIjoid2ViLW9yaWdpbnMgYmFzaWMgcHJvZmlsZSBzZXJ2aWNlX2FjY291bnQgYWNyIGVtYWlsIHJvbGVzIn0.Ow66UBJZ3f9IHcvZQc4oxdops1tWNCOli5Dv2hO-_zu35YVgFb657Q6aBWm3qbBdn3C-HtM1B6u_3Qk38Xw0cQ"
+}
+
+###
+# group: USUARIOS / USUARIOS
+# @name Actualizar Usuario
+PUT localhost:8072/upn201/gatewayserver/api/keycloak/user/update?
+    id=60b484ae-52f3-4a01-b272-f4ab85eb9fb1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDA1NTIsImlhdCI6MTc0NjIwMDI1MiwianRpIjoiMDkxZDgxNTUtYWI2OS00NjBhLTgzNGYtYzJiMWZiM2I3ZWY2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6IjYwYjQ4NGFlLTUyZjMtNGEwMS1iMjcyLWY0YWI4NWViOWZiMSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImEzMWM2ZTdhLTkxNDMtNGY5Mi1iNmNhLTBlOWRiZWM1ZGZhOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFkbWluLXJlYWxtLXJvbCIsImRlZmF1bHQtcm9sZXMtc3ByaW5nLWJvb3QtdXBuLXJlYWxtLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19LCJ1cG4yMDEiOnsicm9sZXMiOlsiYWRtaW4tdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgWW9zZWYgR2FyY8OtYSBTYW50aWFnbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImRldmRhbmllbCIsImdpdmVuX25hbWUiOiJEYW5pZWwgWW9zZWYiLCJmYW1pbHlfbmFtZSI6IkdhcmPDrWEgU2FudGlhZ28iLCJlbWFpbCI6ImRhbmllbHlvc2VmNzc3QGdtYWlsLmNvbSJ9.kRQyhm-a2tkNxJZtPbU-zB_NlZ2zlx8PzhmyX4D67Vj7smnzi3HLh4AdTOmORxKkelNeqGBxVE6-8xPBkCn_8cIO_6Y4NRHAyI52oWkcEqhmm3bKIiqOGJgZPKBz2OqTfGH1eEXrvvhUGkREXOT0kNDhITdkLlveHjUrTzTFIOKYygMV3L6KbUyx6R-zSgsQISXvRA1RORpHH63VxnznKs_OI3TPeANWV24BlfuVdnuUj2fqN1WbfT5FLLd0m8VLt9mOLsZuifIbDiyTr8XILpolmvl3RtpnXxDaW3aFE4dBkAnMGcx2PHhNK9E5w7Tj0bY1w7kw-Q77lQHEwnqAlA
+Content-Type: application/json
+
+{
+  "nombre": "Daniel Yosef",
+  "apellidoPaterno": "Santiago",
+  "apellidoMaterno": "García",
+  "email": "danielyosef777@gmail.com",
+  "usernamePersonalizado": "devdaniel777",
+  "password": "1234",
+  "roles": [
+    "admin"
+  ]
+}
+
+###
+# group: USUARIOS / USUARIOS
+# @name Buscar Por UUID
+GET localhost:8072/upn201/gatewayserver/api/usuarios/find-by-uuid-keycloak?
+    uuidKeycloak=3af2a98f-5cf4-4f39-bed7-ec1501ad89d6
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDAxMjQsImlhdCI6MTc0NjE5OTgyNCwianRpIjoiZWE5NmIyNjYtNWVkNy00YWUxLWFmYmUtZTJmMWNjMTFkZWVjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNhZjJhOThmLTVjZjQtNGYzOS1iZWQ3LWVjMTUwMWFkODlkNiIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImNjYzllOWU0LWI3ZWItNDFiNS05YmQyLWY5ODExNDBhZmU0ZSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsidXNlci1yZWFsbS1yb2wiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2Il19LCJyZXNvdXJjZV9hY2Nlc3MiOnsidXBuMjAxIjp7InJvbGVzIjpbInVzZXItdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgWW9zZWYgR2FyY8OtYSBTYW50aWFnbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImRldmRhbmllbCIsImdpdmVuX25hbWUiOiJEYW5pZWwgWW9zZWYiLCJmYW1pbHlfbmFtZSI6IkdhcmPDrWEgU2FudGlhZ28iLCJlbWFpbCI6ImRhbmllbHlvc2VmNzc3QGdtYWlsLmNvbSJ9.jZM4FbuDk5ykHwhSS7hAsTdE4E6amABKhCRQyWfFWBVQjIUH-aaSKCU8kgMzjsRFsNP4XRXM_8Z6uZCJLESIt_owtNyGNkaX-RUxemGAp0qExC2m0rZuIP5YL2FsMMvoveKO3C74SOc_l67k_MPtZUOK6YnZpXpr4HL_JsJ9jg0gVtubU2QToowZVlipcy18VVet_5pUYbOlla5b1AJ7HuDFLtGIgAnhnitGUuWGeo-VlocDzyO5faJKRZn3HZrNlRYRfAE-rlU061a9XpC_PWdIhj4RH2FMMlAoMJZwDWKROpDstHWQLmuVqBKcejkmkHvy2aCPhD-5Lu_ctWP7KA
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+
+--WebAppBoundary
+
+###
+# group: USUARIOS / USUARIOS
+# @name Crear Usuario
+POST localhost:8072/upn201/gatewayserver/api/keycloak/user/create
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDAyNjQsImlhdCI6MTc0NjE5OTk2NCwianRpIjoiNTJjOTM1YjctOTkwMy00MGI0LWIzMDYtOWIyNjhjMDI2OTEwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6Ijg5MmIxZmQ2LWMzMTMtNGVhZS05YWI4LWIxMzAxYjdiMzEyNyIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6IjYwODE0NDNmLTUzZWItNGE1OC1hOTc5LWUwZjU2ZDczYTlkZCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFkbWluLXJlYWxtLXJvbCIsImRlZmF1bHQtcm9sZXMtc3ByaW5nLWJvb3QtdXBuLXJlYWxtLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19LCJ1cG4yMDEiOnsicm9sZXMiOlsiYWRtaW4tdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.juf_kZz9vKdgE4VIKvzSTLT72cLO9QDFryHqFjpKd4ZkKCrRolPAFfrJCj-zXopjTOt61uI1qjNx2hJN8p825zkfjJglrCCkGUKoDRZjZc49XSA91sTzF9Ahw13MiKTDBjcqkOkg2cnKUxtLe_bwxQYtcscU9yKUKIkJrrc8gd9kVgqGIYLQVBQGsLm_FulV8pA6yiImhVwEnqPdk590z313Zvb-9WhQkN0uLhx6BYQWC3qezu_yBO7TeMM9lKaY0U6QrakRfx28o2Q9CYVcZpCkzTRAy8g9050xuElV5TiixXmlnB4J6u6Dpjz1STY2dWFJvGT7ghycqF07CDveXQ
+Content-Type: application/json
+
+{
+  "nombre": "Daniel Yosef",
+  "apellidoPaterno": "Santiago",
+  "apellidoMaterno": "García",
+  "email": "danielyosef777@gmail.com",
+  "username": "devdaniel",
+  "password": "1234",
+  "roles": [
+    "admin"
+  ]
+}
+
+###
+# group: USUARIOS / USUARIOS
+# @name Buscar Todos los Usuarios
+GET localhost:8072/upn201/gatewayserver/api/usuarios/find-all
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NTg4Njg0ODMsImlhdCI6MTc1ODg2ODE4MywianRpIjoiYzQ5NGU5MjgtZjExMi00YzEyLWFjZWMtY2E1YzU1MzEyZmYxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2Iiwic3ViIjoiNTY2YTZmMWMtZDI1Ni00MGZiLWI1NGEtOTYzNWE2NGI5NDI2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidXBuMjAxIiwic2lkIjoiM2U5ZDgyMjgtNGJmZS00YjY1LTg2OTUtNTIzY2NkMzljZTRlIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJ1c2VyLXJlYWxtLXJvbCJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InVwbjIwMSI6eyJyb2xlcyI6WyJ1c2VyLXVwbi1yb2wiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJIZWN0b3IgQWRyaWFuIFZhenF1ZXogUGF1bG8iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXZwYXVsbyIsImdpdmVuX25hbWUiOiJIZWN0b3IgQWRyaWFuIiwiZmFtaWx5X25hbWUiOiJWYXpxdWV6IFBhdWxvIiwiZW1haWwiOiJoX2FfcF92QG91dGxvb2suY29tIn0.aw0ptBe5CCiL49ZCUd5jlCGANhXXko8cXOMv4xLIBmGGazxi07B4M956KRqK4gxsLs4s_gmpuqP8ocKijwONuBjlTNzIVzVbtoDjcg0QaBo8V_JSRBQjWWatNvsTnJLyUVuZNjnJK8ljhsvZ4zqs2SEhQCKLbMJUDAa4TAoTOdVthhpr6McF3uJ5LZxYR4DIw0igGV0fAUFFmpHwMae3LIjd6T1LROtdZIDNMVZ3Rz532S9sUofv7rKJ6WrLhPDoly92ktydpSE8c1fW61TBA_JPOj4aEfwcLP_lP1HhTIeIx44qrExTnXO5sd-jG7tJVL-TvlmxQ7OhpcFyz9KeRQ
+
+###
+# group: USUARIOS / IMAGENES
+# @name Foto de perfil por defecto
+GET localhost:8072/upn201/gatewayserver/api/usuarios/profile-picture/default
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYwMzI1OTgsImlhdCI6MTc0NjAzMjI5OCwianRpIjoiNTBiNDUxMGUtNDA5YS00ZjE4LTk0N2ItMzE1ZmYyMTFmZmUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoicmVhbG0tbWFuYWdlbWVudCIsInN1YiI6ImQ0Yjk5ZTBhLTkzOGYtNGJhMS05NmMzLTVjY2Q4NmNiNDlmOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6Ijc0NmNmMDcwLWQwY2EtNDM2OS04MWY2LTkzYWNjMDA1YjBjNiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tcmVhbG0tcm9sIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwicXVlcnktZ3JvdXBzIiwicXVlcnktdXNlcnMiXX0sInVwbjIwMSI6eyJyb2xlcyI6WyJhZG1pbi11cG4tcm9sIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgR2FyY2lhIFNhbnRpYWdvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZGFuaWVsMiIsImdpdmVuX25hbWUiOiJEYW5pZWwiLCJmYW1pbHlfbmFtZSI6IkdhcmNpYSBTYW50aWFnbyIsImVtYWlsIjoiZGFuaWVsQGdtYWlsLmNvbSJ9.TMeLwYPMrfpv4xkJWVV-DBpXzAJzJYQgf1E6jBLNUJXyeDykqt-l6XihHcv78BofSyozgRCI02qeCDf3PwZMPn2NtlGW7IpXJZovRoLxlqfHqLlarKlz9PsXC_g3xS9MmUFOoF1UUvhp9UKHkccHfhHYQ4zM68E8zIQv_VNUWzpDVvlVBWvt9ookeY9DcCLpUzJT6g2F9yuKHpkPFChHr9NJOdVa8pvZ_0WUbYCkPdlT6di0XzgxXF5ACwni2wOAdBlVjYKWXn5EpHluIa-nuxXQZ2y1Q2xeyUhOXKSfZh6pCOitfLkHS12CtgmL1W0jdDhShdYHIgJBkhcMjDg3wQ
+
+###
+# group: USUARIOS / IMAGENES
+# @name Guardar Foto de Perfil
+POST localhost:8072/upn201/gatewayserver/api/usuarios/profile-picture/f556335b-2b0c-44a7-8984-a9c721d23b7b
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYwMzI5ODYsImlhdCI6MTc0NjAzMjY4NiwianRpIjoiY2M5NjhkMDQtMGVjYy00OWZiLWFhMGUtMTA1YTUxZWI4ZmMxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoicmVhbG0tbWFuYWdlbWVudCIsInN1YiI6ImQ0Yjk5ZTBhLTkzOGYtNGJhMS05NmMzLTVjY2Q4NmNiNDlmOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImNmYTJjMmI0LTU0MGItNDUzOC1hZjUyLTQ3ZjQyMzRjNDAwYyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tcmVhbG0tcm9sIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwicXVlcnktZ3JvdXBzIiwicXVlcnktdXNlcnMiXX0sInVwbjIwMSI6eyJyb2xlcyI6WyJhZG1pbi11cG4tcm9sIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgR2FyY2lhIFNhbnRpYWdvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZGFuaWVsMiIsImdpdmVuX25hbWUiOiJEYW5pZWwiLCJmYW1pbHlfbmFtZSI6IkdhcmNpYSBTYW50aWFnbyIsImVtYWlsIjoiZGFuaWVsQGdtYWlsLmNvbSJ9.EC4SPSSiBYm-4B4lXu7uCV5TOSuYXt9xzpcTcJuZ7kayPV2VZ3b8PbrHDbqxOdBSHTsADkyL91Cl1DTR449ZoTQkq6xV8Zuh0H14qEELarzTbn_BLeS3JralINbjL7fm9xnOtiHNM8TmLzNnI3ljjA6VoEY5KFyvLM3dXtrK79AkwxGgimVmk2W-0BFZ83spxzfImS4mM2amRbSzqteujvyN542-aMnAGjETNxyfEXQoylG7A-GFV9tgNEz4o4qOiGf3LqogxlTJzLDobpdAbhc9yyljcmsFu6XS87LzfEQcaxnnhUKMj1Po2D3SWW7JopRN_xmQwPWIrAXAUREE3g
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="/C:/Users/Daniel Santiago/Downloads/MESSI.jpg"
+
+< /C:/Users/Daniel Santiago/Downloads/MESSI.jpg
+--WebAppBoundary
+
+###
+# group: SICI / INVENTARIO
+# @name Crear Inventario
+POST localhost:8072/upn201/gatewayserver/api/sici/inventario/create
+Content-Type: application/json
+
+{
+  "nombre": "Laptop",
+  "marca": "Asus",
+  "modelo": " Rog Zephyrus G16",
+  "descripcion": "Ryzen 7 5000, Nvidia RTX 3050",
+  "numeroDeSerie": "abcd123456",
+  "fechaDeAlta": "2025-04-24"
+}
+
+###
+# group: SICI / INVENTARIO
+# @name Actualizar Inventario
+PUT localhost:8072/upn201/gatewayserver/api/sici/inventario/update?
+    id=121
+Content-Type: application/json
+
+{
+  "nombre": "Laptop",
+  "marca": "Asus",
+  "modelo": " Rog Zephyrus G16",
+  "descripcion": "Ryzen 7 5000, Nvidia RTX 3050",
+  "numeroDeSerie": "abcd123456",
+  "fechaDeAlta": "2025-04-24",
+  "fechaDeBaja": "2025-04-24"
+}
+
+###
+# group: SICI / INVENTARIO
+# @name Buscar todos
+GET localhost:8072/upn201/gatewayserver/api/sici/inventario/find-all
+
+###
+# group: SICI / INVENTARIO
+# @name Buscar Por Id
+GET localhost:8072/upn201/gatewayserver/api/sici/inventario/find-by-id?
+    id=121
+
+###
+# group: SICI / INVENTARIO
+# @name Deshabilitar
+DELETE localhost:8072/upn201/gatewayserver/api/sici/inventario/deshabilitar?
+    id=121
+
+###
+# group: SICI / VALE
+# @name Crear Vale
+POST localhost:8072/upn201/gatewayserver/api/sici/vale/create
+Content-Type: application/json
+
+{
+  "descripcion": "Se requirió una laptop para un practicante",
+  "comentario": "Algún comentario",
+  "inventarioId": 100,
+  "areaAsignadaId": 100,
+  "empleadoEntregaId": 100,
+  "fechaAlta": "2025-04-12",
+  "empleadoAutorizaId": 100,
+  "empleadoRecibeId": 100
+}
+
+###
+# group: SICI / VALE
+# @name Buscar todos los vales
+GET localhost:8072/upn201/gatewayserver/api/sici/vale/find-all
+
+###
+# group: SICI / VALE
+# @name Buscar Vale por ID
+GET localhost:8072/upn201/gatewayserver/api/sici/vale/find-by-id?
+    id=100
+
+###
+# group: EMPLEADOS / EMPLEADO
+# @name Crear Empleado
+POST localhost:8072/upn201/gatewayserver/api/empleados/empleado/create
+Content-Type: application/json
+
+{
+  "nombre": "Diego",
+  "apellidoPaterno": "Sosa Ramirez",
+  "apellidoMaterno": "Vazquez",
+  "clave": "SORD040501HOCNRNA2",
+  "areaId": 100,
+  "rolId": 100
+}
+
+###
+# group: EMPLEADOS / EMPLEADO
+# @name Actualizar Empleado
+PUT localhost:8072/upn201/gatewayserver/api/sici/empleado/update?
+    id=101
+Content-Type: application/json
+
+{
+  "nombre": "Daniel Yosef",
+  "apellidoPaterno": "Santiago",
+  "apellidoMaterno": "Garcia",
+  "clave": "SAGD040501HOCNRNA2",
+  "areaId": 100,
+  "rolId": 105
+}
+
+###
+# group: EMPLEADOS / EMPLEADO
+# @name Buscar todos los Empleados
+GET localhost:8072/upn201/gatewayserver/api/sici/empleado/find-all
+
+###
+# group: EMPLEADOS / EMPLEADO
+# @name Buscar Por Id
+GET localhost:8072/upn201/gatewayserver/api/empleados/empleado/find-by-id?
+    id=100
+
+###
+# group: EMPLEADOS / EMPLEADO
+# @name Deshabilitar
+DELETE localhost:8072/upn201/gatewayserver/api/sici/empleado/deshabilitar?
+    id=101
+
+###
+# group: EMPLEADOS / AREA
+# @name Crear Area
+POST localhost:8072/upn201/gatewayserver/api/empleados/area/create
+Content-Type: application/json
+
+{
+  "nombre": "Sistemas",
+  "descripcion": "Area de Sistemas de la UPN"
+}
+
+###
+# group: EMPLEADOS / AREA
+# @name Actualizar Area
+PUT localhost:8072/upn201/gatewayserver/api/sici/empleados/update?
+    id=100
+Content-Type: application/json
+
+{
+  "nombre": "Sistemas",
+  "descripcion": "Area de Sistemas de la UPN"
+}
+
+###
+# group: EMPLEADOS / AREA
+# @name Buscar Todos
+GET localhost:8072/upn201/gatewayserver/api/empleados/area/find-all
+
+###
+# group: EMPLEADOS / AREA
+# @name Buscar por Id
+GET localhost:8072/upn201/gatewayserver/api/empleados/area/find-by-id?
+    id=100
+
+###
+# group: EMPLEADOS / AREA
+# @name Deshabilitar Area
+DELETE localhost:8072/upn201/gatewayserver/api/sici/area/deshabilitar?
+    id=100
+
+###
+# group: EMPLEADOS / ROL
+# @name Crear Rol
+POST localhost:8072/upn201/gatewayserver/api/empleados/rol/create
+Content-Type: application/json
+
+{
+  "nombre": "Crear",
+  "descripcion": "El usuario puede crear registros"
+}
+
+###
+# group: EMPLEADOS / ROL
+# @name Actualizar Rol
+PUT localhost:8072/upn201/gatewayserver/api/sici/rol/update?
+    id=105
+Content-Type: application/json
+
+{
+  "nombre": "DIOS",
+  "descripcion": "El usuario puede hacer lo que se le salga de los huevos"
+}
+
+###
+# group: EMPLEADOS / ROL
+# @name Buscar todos los Roles
+GET localhost:8072/upn201/gatewayserver/api/sici/rol/find-all
+
+###
+# group: EMPLEADOS / ROL
+# @name Buscar Por Id
+GET localhost:8072/upn201/gatewayserver/api/sici/rol/find-by-id?
+    id=105
+
+###
+# group: EMPLEADOS / ROL
+# @name Deshabilitar Rol
+DELETE localhost:8072/upn201/gatewayserver/api/sici/rol/deshabilitar?
+    id=105

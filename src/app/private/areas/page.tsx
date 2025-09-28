@@ -1,0 +1,73 @@
+"use client";
+
+import * as React from 'react';
+import { alpha } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import { chartsCustomizations, datePickersCustomizations, treeViewCustomizations } from "@/utils/theme/customizations";
+import AppNavbar from '@/components/private/AppNavbar/AppNavbar';
+import SideMenu from '@/components/private/SideMenu/SideMenu';
+import Header from '@/components/private/Header/Header';
+import AppTheme from '@/utils/theme/AppTheme';
+import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
+import Typography from "@mui/material/Typography";
+import Copyright from "@/components/private/copyright/copyright";
+import ItemShow from "@/components/private/ItemShow/ItemShow";
+
+const PageContent = (props: {disableCustomTheme?: boolean}) => {
+    const { theme } = useTheme();
+    const xThemeComponents = {
+        ...chartsCustomizations,
+        ...datePickersCustomizations,
+        ...treeViewCustomizations,
+    }
+    return <AppTheme {...props} themeComponents={xThemeComponents} mode={theme}>
+        <CssBaseline enableColorScheme />
+        <Box sx={{ display: 'flex' }}>
+
+            <SideMenu />
+            <AppNavbar />
+
+            {/*Contenido principal*/}
+            <Box
+                component="main"
+                sx={( theme) => ({
+                    flexGrow: 1,
+                    backgroundColor: theme.vars
+                        ? `rgba(${theme.vars.palette.background.defaultChannel} /1)`
+                        : alpha(theme.palette.background.default, 1),
+                    overflow: 'auto',
+                })}
+            >
+                <Stack spacing={2}
+                       sx={{
+                           alignItems: 'center',
+                           mx: 3,
+                           pb: 5,
+                           mt: { xs: 8, md: 0 },
+                       }}>
+                    <Header />
+                    <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
+                        {/* cards */}
+                        <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
+                            Areas
+                        </Typography>
+                        <ItemShow />
+                        <Copyright sx={{ my: 4 }} />
+                    </Box>
+    </Stack>
+            </Box>
+
+        </Box>
+
+    </AppTheme>;
+}
+
+const Areas = () => {
+    return (
+        <PageContent />
+    );
+};
+
+export default Areas;
