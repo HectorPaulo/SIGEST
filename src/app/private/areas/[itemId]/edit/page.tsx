@@ -12,7 +12,7 @@ import Header from '@/components/private/Header/Header';
 import AppTheme from '@/utils/theme/AppTheme';
 import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
 import Copyright from "@/components/private/copyright/copyright";
-import GenericList from '@/components/private/GenericList/GenericList';
+import GenericEdit from "@/components/private/GenericEdit/GenericEdit";
 import { areaConfig } from '@/lib/config/entityConfigs';
 import type { Area } from '@/types/area';
 
@@ -51,7 +51,7 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
                     <Header />
                     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
                         <div className='h-screen'>   
-                            <GenericList<Area> config={areaConfig} />
+                            <GenericEdit<Area> config={areaConfig} />
                             <Copyright sx={{ my: 4 }} />
                         </div>
                     </Box>
@@ -63,10 +63,10 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
     </AppTheme>;
 }
 
-const Areas = () => {
+const AreaEditPage = () => {
     return (
         <PageContent />
     );
 };
 
-export default Areas;
+export default AreaEditPage;

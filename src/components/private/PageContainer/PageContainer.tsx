@@ -61,14 +61,15 @@ export default function PageContainer(props: PageContainerProps) {
                         {breadcrumbs
                             ? breadcrumbs.map((breadcrumb, index) => {
                                 return breadcrumb.path ? (
-                                    <Link key={index} href={breadcrumb.path} passHref>
-                                        <MuiLink
-                                            underline="hover"
-                                            color="inherit"
-                                        >
-                                            {breadcrumb.title}
-                                        </MuiLink>
-                                    </Link>
+                                    <MuiLink
+                                        key={index}
+                                        component={Link}
+                                        href={breadcrumb.path}
+                                        underline="hover"
+                                        color="inherit"
+                                    >
+                                        {breadcrumb.title}
+                                    </MuiLink>
                                 ) : (
                                     <Typography
                                         key={index}

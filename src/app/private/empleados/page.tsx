@@ -1,20 +1,20 @@
 "use client";
 
-import * as React from 'react';
-import { alpha } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { chartsCustomizations, datePickersCustomizations, treeViewCustomizations } from "@/utils/theme/customizations";
-import AppNavbar from '@/components/private/AppNavbar/AppNavbar';
-import SideMenu from '@/components/private/SideMenu/SideMenu';
-import Header from '@/components/private/Header/Header';
-import AppTheme from '@/utils/theme/AppTheme';
-import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
+import {chartsCustomizations, datePickersCustomizations, treeViewCustomizations} from "@/utils/theme/customizations";
+import CssBaseline from "@mui/material/CssBaseline";
+import {useTheme} from "@/utils/context/ThemeContext/ThemeContext";
+import AppTheme from "@/utils/theme/AppTheme";
+import Box from "@mui/material/Box";
+import SideMenu from "@/components/private/SideMenu/SideMenu";
+import AppNavbar from "@/components/private/AppNavbar/AppNavbar";
+import {alpha} from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Header from "@/components/private/Header/Header";
+import GenericList from "@/components/private/GenericList/GenericList";
 import Copyright from "@/components/private/copyright/copyright";
-import GenericList from '@/components/private/GenericList/GenericList';
-import { areaConfig } from '@/lib/config/entityConfigs';
-import type { Area } from '@/types/area';
+import * as React from "react";
+import {Empleado} from "@/types/empleado";
+import {empleadoConfig} from "@/lib/config/entityConfigs";
 
 const PageContent = (props: {disableCustomTheme?: boolean}) => {
     const { theme } = useTheme();
@@ -50,8 +50,8 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
                        }}>
                     <Header />
                     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-                        <div className='h-screen'>   
-                            <GenericList<Area> config={areaConfig} />
+                        <div className='h-screen'>
+                            <GenericList<Empleado> config={empleadoConfig} />
                             <Copyright sx={{ my: 4 }} />
                         </div>
                     </Box>
@@ -63,10 +63,8 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
     </AppTheme>;
 }
 
-const Areas = () => {
-    return (
-        <PageContent />
-    );
+const Empleados = () => {
+        return <PageContent />;
 };
 
-export default Areas;
+    export default Empleados;

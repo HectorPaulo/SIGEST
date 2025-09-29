@@ -6,13 +6,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { chartsCustomizations, datePickersCustomizations, treeViewCustomizations } from "@/utils/theme/customizations";
-import AppNavbar from '@/components/private/AppNavbar/AppNavbar';
 import SideMenu from '@/components/private/SideMenu/SideMenu';
 import Header from '@/components/private/Header/Header';
 import AppTheme from '@/utils/theme/AppTheme';
 import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
-import Copyright from "@/components/private/copyright/copyright";
-import GenericList from '@/components/private/GenericList/GenericList';
+import GenericCreate from "@/components/private/GenericCreate/GenericCreate";
 import { areaConfig } from '@/lib/config/entityConfigs';
 import type { Area } from '@/types/area';
 
@@ -28,7 +26,6 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
         <Box sx={{ display: 'flex' }}>
 
             <SideMenu />
-            <AppNavbar />
 
             {/*Contenido principal*/}
             <Box
@@ -51,8 +48,7 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
                     <Header />
                     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
                         <div className='h-screen'>   
-                            <GenericList<Area> config={areaConfig} />
-                            <Copyright sx={{ my: 4 }} />
+                            <GenericCreate<Area> config={areaConfig} />
                         </div>
                     </Box>
                 </Stack>
@@ -63,10 +59,10 @@ const PageContent = (props: {disableCustomTheme?: boolean}) => {
     </AppTheme>;
 }
 
-const Areas = () => {
+const AreasNewPage = () => {
     return (
         <PageContent />
     );
 };
 
-export default Areas;
+export default AreasNewPage;

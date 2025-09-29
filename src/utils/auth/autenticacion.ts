@@ -2,10 +2,7 @@ import axios from "@/lib/axios";
 
 export async function login(username: string, password: string) {
   try {
-    console.log("Enviando petición de login a:", "/auth/login");
-    const response = await axios.post("/auth/login", { username, password });
-    console.log("Respuesta del servidor:", response);
-    console.log("Data de la respuesta:", response.data);
+    const response = await axios.post("/auth/login", { username, password }, { timeout: 10000 });
 
     // Ajustar para la estructura real de tu API
     const {
@@ -80,9 +77,8 @@ export async function login(username: string, password: string) {
     };
   } catch (error) {
     console.error("Error en login:", error);
-    if (axios.isAxiosError(error)) {
-      console.error("Response data:", error.response?.data);
-      console.error("Response status:", error.response?.status);
+    if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
+        throw new Error("La peticion de inicio de sesion ha tardado demasiado tiempo. Intentalo de nuevo.");
     }
     throw error;
   }

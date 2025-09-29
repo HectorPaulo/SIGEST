@@ -18,7 +18,7 @@ export default function Copyright(props: any) {
         >
             {'Todos los derechos resevados © '}
             <Link color="inherit" href="https://mui.com/">
-                Upn 201
+                Upn 201.
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}

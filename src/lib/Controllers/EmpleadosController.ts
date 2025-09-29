@@ -1,35 +1,59 @@
 ﻿import axios from "axios";
 import {Empleado, EmpleadoInsert} from "@/types/empleado";
 
+// ? ----------------------> Empleados <----------------------
 
-// ? ----------------------> Áreas <----------------------
-// Función para crear un área
-
+// Función para crear un empleado
 export const CreateEmpleado = async (data: EmpleadoInsert) => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/employee/create`, data);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/employee/create`;
+    if (!token) throw new Error('No hay ningun token');
+    const response = await axios.post(url, data, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
 };
 
-// Función para actualizar un área
+// Función para actualizar un empleado
 export const UpdateEmpleado = async (id: number, data: Empleado) => {
-    const response = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/employee/update?id=${id}`, data);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/employee/update?id=${id}`;
+    if (!token) throw new Error('No hay ningun token');
+    const response = await axios.put(url, data, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
 };
 
-// Función para obtener todas las áreas
+// Función para obtener todos los empleados
 export const GetAllEmpleados = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/employee/find-all`);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/employee/find-all`;
+    if (!token) throw new Error('Token no encontrado');
+    const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
 };
 
-// Función para obtener un área por ID
+// Función para obtener un empleado por ID
 export const GetEmpleadoById = async (id: number) => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/employee/find-by-id?id=${id}`);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/employee/find-by-id?id=${id}`;
+    if (!token) throw new Error('No hay ningun token');
+    const response = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
 };
 
-// Función para eliminar un área
+// Función para eliminar un empleado
 export const DeleteEmpleado = async (id: string) => {
-    const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/employee/delete?id=${id}`);
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const url = `${process.env.NEXT_PUBLIC_DISABLE_URL}/employee/deshabilitar?id=${id}`;
+    if (!token) throw new Error('No hay ningun token');
+    const response = await axios.delete(url, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
 };
