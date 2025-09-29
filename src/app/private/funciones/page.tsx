@@ -1,9 +1,17 @@
-"use client";
+'use client'
 
-import GenericList from '@/components/private/GenericList/GenericList';
-import { funcionConfig } from '@/lib/config/entityConfigs';
-import type { Funcion } from '@/types/funcion';
+import PrivateLayout from '@/components/private/PrivateLayout/PrivateLayout'
+import GenericList from '@/components/private/GenericList/GenericList'
+import { funcionConfig } from '@/lib/config/entityConfigs'
 
-export default function FuncionesPage() {
-    return <GenericList<Funcion> config={funcionConfig} />;
+interface FuncionesPageProps {
+    disableCustomTheme?: boolean;
+}
+
+export default function FuncionesPage(props: FuncionesPageProps) {
+    return (
+        <PrivateLayout disableCustomTheme={props.disableCustomTheme}>
+            <GenericList config={funcionConfig} />
+        </PrivateLayout>
+    );
 }

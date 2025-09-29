@@ -68,7 +68,7 @@ const PageContent: React.FC = () => {
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className={`text-7xl font-bold mb-6 text-center ${theme === 'light' ? 'text-blue-950' : 'text-white'}`}
+                className={`text-6xl font-black mb-6 text-center ${theme === 'light' ? 'text-blue-950' : 'text-white'}`}
             >
                 Contacto
             </motion.h2>
@@ -83,26 +83,19 @@ const PageContent: React.FC = () => {
                         initial={{ opacity: 0, y: -50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="font-sans text-xl font-medium mb-4"
+                        className="font-sans text-xl font-medium mb-4 text-justify"
                     >
-                        Agradecemos sinceramente tu interés en el <strong>área de sistemas</strong> de la <strong>Universidad Pedagógica Nacional, Unidad 201</strong>. Nos complace saber que deseas conocer más sobre nuestro trabajo, servicios y las soluciones tecnológicas que ofrecemos. Nuestra misión es brindar un soporte eficiente y personalizado, asegurando que cada consulta o inquietud sea atendida con la mayor prontitud y profesionalismo.
+                        Agradecemos sinceramente tu interés en el <strong>área de sistemas</strong> de la <strong>Universidad Pedagógica Nacional, Unidad 201</strong>. Nuestra misión es brindar un soporte eficiente y personalizado, asegurando que cada consulta o inquietud sea atendida con la mayor prontitud y profesionalismo.
                     </motion.p>
                     <motion.p
                         initial={{ opacity: 0, y: -50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="font-sans text-xl font-medium mb-4"
+                        className="font-sans text-xl font-medium mb-4 text-justify"
                     >
-                        Para cualquier tipo de consulta, información adicional o asesoría específica, ponemos a tu disposición nuestros canales de comunicación oficiales. Ya sea que necesites resolver dudas técnicas, solicitar apoyo con algún problema relacionado con las tecnologías que manejamos, o simplemente obtener más detalles sobre los servicios que ofrecemos, nuestro equipo está listo y dispuesto a ayudarte en todo momento.
+                        Para cualquier tipo de consulta, información adicional o asesoría específica, ponemos a tu disposición nuestros canales de comunicación oficiales.
                     </motion.p>
-                    <motion.p
-                        initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.5 }}
-                        className="font-sans text-xl font-medium mb-4"
-                    >
-                        No dudes en comunicarte con nosotros. Estaremos encantados de proporcionarte la orientación necesaria, responder tus preguntas y colaborar contigo para encontrar <strong>soluciones adaptadas a tus necesidades</strong>. Tu satisfacción y confianza son nuestra prioridad, y trabajamos día a día para garantizar un servicio de calidad.
-                    </motion.p>
+
                     <motion.div
                         initial={{ opacity: 0, y: -50 }}
                         animate={{ opacity: 1, y: 0 }}

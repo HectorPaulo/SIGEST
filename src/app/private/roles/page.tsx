@@ -1,9 +1,17 @@
-"use client";
+'use client'
 
-import GenericList from '@/components/private/GenericList/GenericList';
-import { rolConfig } from '@/lib/config/entityConfigs';
-import type { Rol } from '@/types/rol';
+import PrivateLayout from '@/components/private/PrivateLayout/PrivateLayout'
+import GenericList from '@/components/private/GenericList/GenericList'
+import { rolConfig } from '@/lib/config/entityConfigs'
 
-export default function RolesPage() {
-    return <GenericList<Rol> config={rolConfig} />;
+interface RolesPageProps {
+    disableCustomTheme?: boolean;
+}
+
+export default function RolesPage(props: RolesPageProps) {
+    return (
+        <PrivateLayout disableCustomTheme={props.disableCustomTheme}>
+            <GenericList config={rolConfig} />
+        </PrivateLayout>
+    );
 }

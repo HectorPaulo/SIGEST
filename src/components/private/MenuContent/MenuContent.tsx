@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
+import CommitTwoToneIcon from '@mui/icons-material/CommitTwoTone';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
@@ -21,7 +22,8 @@ const mainListItems = [
     { text: 'Inicio', icon: <HomeRoundedIcon />, route: '/private/dashboard'},
     { text: 'Bitácora', icon: <FolderOpenIcon />, route: '/private/bitacora' },
     { text: 'Empleados', icon: <AssignmentIndIcon />, route: '/private/empleados' },
-    { text: 'areas', icon: <ApartmentRoundedIcon />, route: '/private/areas' },
+    { text: 'Roles', icon: <CommitTwoToneIcon />, route: '/private/roles' },
+    { text: 'Áreas', icon: <ApartmentRoundedIcon />, route: '/private/areas' },
     { text: 'Inventario', icon: <Inventory2RoundedIcon />, route: '/private/inventario' },
     { text: 'Vales', icon: <ReceiptLongRoundedIcon />, route: '/private/vales' },
     { text: 'Usuarios', icon: <SupervisedUserCircleRoundedIcon />, route: '/private/usuarios' },

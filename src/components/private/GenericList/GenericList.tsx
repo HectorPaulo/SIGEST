@@ -31,7 +31,7 @@ interface GenericListProps<T extends BaseEntity> {
     config: EntityConfig<T>;
 }
 
-export default function GenericList<T extends BaseEntity>({ config }: GenericListProps<T>) {
+function GenericList<T extends BaseEntity>({ config }: GenericListProps<T>) {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -315,3 +315,5 @@ export default function GenericList<T extends BaseEntity>({ config }: GenericLis
         </PageContainer>
     );
 }
+
+export default GenericList;

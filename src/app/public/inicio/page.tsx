@@ -80,7 +80,7 @@ const PageContent = () => {
                         <Image
                             className='max-w-xl'
                             src="/assets/devices.svg"
-                            alt="imagen de apoyo"
+                            alt="Imagen de personas con dispositivos"
                             width={400}
                             height={300}
                             style={{ width: '100%', height: 'auto' }}

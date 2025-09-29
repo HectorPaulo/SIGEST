@@ -10,7 +10,7 @@ import StatCard, {StatCardProps} from "@/components/private/StatCard/StatCard";
 import SessionsChart from "@/components/private/SessionChart/SessionChart";
 import CustomizedDataGrid from "@/components/private/CustomizedDataGrid/CustomizedDataGrid";
 import Copyright from "@/components/private/copyright/copyright";
-import { GetAllUsers } from '@/lib/Controllers/UsersControllers';
+import { GetAllUsers } from '@/lib/Controllers/UsersController';
 import { GetAllAreas } from '@/lib/Controllers/AreaController';
 import { GetAllInventario } from '@/lib/Controllers/InventarioController';
 import { GetAllVales } from '@/lib/Controllers/ValesController';

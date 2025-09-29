@@ -14,7 +14,7 @@ import {SidebarItems} from "@/types/SidebarItem";
 import {logout} from "@/utils/auth/autenticacion";
 import {Alert, AlertTitle} from "@mui/material";
 import {useUser} from "@/utils/context/UserContext/UserContext";
-import {GetUserByEmail} from "@/lib/Controllers/UsersControllers";
+import {GetUserByEmail} from "@/lib/Controllers/UsersController";
 import {User} from "@/types/user";
 
 interface SidebarDesktopProps {

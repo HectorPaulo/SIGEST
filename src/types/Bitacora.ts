@@ -1,7 +1,9 @@
 ﻿export interface Bitacora {
-    nombre: string;
-    url: string;
-    tipo: string;
-    tamano: string;
-    fechaCreacion: string;
+  id: string;
+  fecha: string;
+  hora: string;
+  motivo: string;
+  empleado: string;
+  entrada: string;
+  observaciones?: string;
 }

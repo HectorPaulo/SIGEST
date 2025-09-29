@@ -1,72 +1,17 @@
-"use client";
+'use client'
 
-import * as React from 'react';
-import { alpha } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { chartsCustomizations, datePickersCustomizations, treeViewCustomizations } from "@/utils/theme/customizations";
-import AppNavbar from '@/components/private/AppNavbar/AppNavbar';
-import SideMenu from '@/components/private/SideMenu/SideMenu';
-import Header from '@/components/private/Header/Header';
-import AppTheme from '@/utils/theme/AppTheme';
-import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
-import Copyright from "@/components/private/copyright/copyright";
-import GenericList from '@/components/private/GenericList/GenericList';
-import { areaConfig } from '@/lib/config/entityConfigs';
-import type { Area } from '@/types/area';
+import PrivateLayout from '@/components/private/PrivateLayout/PrivateLayout'
+import GenericList from '@/components/private/GenericList/GenericList'
+import { areaConfig } from '@/lib/config/entityConfigs'
 
-const PageContent = (props: {disableCustomTheme?: boolean}) => {
-    const { theme } = useTheme();
-    const xThemeComponents = {
-        ...chartsCustomizations,
-        ...datePickersCustomizations,
-        ...treeViewCustomizations,
-    }
-    return <AppTheme {...props} themeComponents={xThemeComponents} mode={theme}>
-        <CssBaseline enableColorScheme />
-        <Box sx={{ display: 'flex' }}>
-
-            <SideMenu />
-            <AppNavbar />
-
-            {/*Contenido principal*/}
-            <Box
-                component="main"
-                sx={( theme) => ({
-                    flexGrow: 1,
-                    backgroundColor: theme.vars
-                        ? `rgba(${theme.vars.palette.background.defaultChannel} /1)`
-                        : alpha(theme.palette.background.default, 1),
-                    overflow: 'auto',
-                })}
-            >
-                <Stack spacing={2}
-                       sx={{
-                           alignItems: 'center',
-                           mx: 3,
-                           pb: 5,
-                           mt: { xs: 8, md: 0 },
-                       }}>
-                    <Header />
-                    <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-                        <div className='h-screen'>   
-                            <GenericList<Area> config={areaConfig} />
-                            <Copyright sx={{ my: 4 }} />
-                        </div>
-                    </Box>
-                </Stack>
-            </Box>
-
-        </Box>
-
-    </AppTheme>;
+interface AreasPageProps {
+    disableCustomTheme?: boolean;
 }
 
-const Areas = () => {
+export default function AreasPage(props: AreasPageProps) {
     return (
-        <PageContent />
+        <PrivateLayout disableCustomTheme={props.disableCustomTheme}>
+            <GenericList config={areaConfig} />
+        </PrivateLayout>
     );
-};
-
-export default Areas;
+}
