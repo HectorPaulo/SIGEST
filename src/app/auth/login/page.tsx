@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import {ThemeProvider, useTheme} from "@/utils/context/ThemeContext/ThemeContext";
+import { ThemeProvider, useTheme } from "@/utils/context/ThemeContext/ThemeContext";
 import UpnSpinner from "@/components/public/Spinners/UpnSpinner/UpnSpinner";
 import { Alert, AlertTitle } from "@mui/material";
-import { login } from "@/utils/auth/autenticacion";
+import { login, isAuthenticated, validateToken, clearAllAuthData } from "@/utils/auth/autenticacion";
 import { useUser } from "@/utils/context/UserContext/UserContext";
 import Footer from "@/components/public/Footer/Footer";
 import Header from "@/components/public/Header/Header";
@@ -19,8 +19,44 @@ const PageContent: React.FC = () => {
     const [alertType, setAlertType] = useState<"success" | "error" | "attention" | null>(null);
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const { setUser } = useUser();
     const { theme } = useTheme();
+
+    // Verificar autenticación al cargar la página
+    React.useEffect(() => {
+        const checkExistingAuth = () => {
+            try {
+                // Verificar si hay datos de autenticación
+                if (isAuthenticated()) {
+                    console.log('Usuario ya tiene datos de autenticación, validando token...');
+
+                    // Validar el token localmente (sin servidor)
+                    const isValidToken = validateToken();
+
+                    if (isValidToken) {
+                        console.log('Token válido, redirigiendo al dashboard...');
+                        router.push('/private/dashboard');
+                        return;
+                    } else {
+                        console.log('Token inválido o expirado, limpiando datos...');
+                        setAlertMessage('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+                        setAlertType('attention');
+                        // Los datos ya fueron limpiados por validateTokenLocally
+                    }
+                }
+            } catch (error) {
+                console.error('Error verificando autenticación existente:', error);
+                // En caso de error, mostrar mensaje pero permitir login normal
+                setAlertMessage('Error verificando sesión anterior. Puedes iniciar sesión normalmente.');
+                setAlertType('attention');
+            } finally {
+                setIsCheckingAuth(false);
+            }
+        };
+
+        checkExistingAuth();
+    }, [router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -72,6 +108,21 @@ const PageContent: React.FC = () => {
         setPassword(e.target.value);
         setError(null);
     };
+
+    const handleClearAuthData = () => {
+        clearAllAuthData();
+        setAlertMessage('Datos de sesión limpiados. Puedes iniciar sesión normalmente.');
+        setAlertType('success');
+    };
+
+    // Mostrar spinner mientras se verifica la autenticación
+    if (isCheckingAuth) {
+        return (
+            <div className="min-h-screen flex justify-center items-center">
+                <UpnSpinner />
+            </div>
+        );
+    }
 
     return (
         <motion.div
@@ -145,6 +196,13 @@ const PageContent: React.FC = () => {
                                 </div>
                             </form>
                             <div className="flex flex-col mt-4 text-sm text-center dark:text-gray-300">
+                                <button
+                                    type="button"
+                                    onClick={handleClearAuthData}
+                                    className="text-xs text-gray-500 hover:text-gray-700 underline mt-2"
+                                >
+                                    ¿Problemas iniciando sesión? Limpiar datos de sesión
+                                </button>
                             </div>
                             {/* Para manejar el servicio de autenticación con Google */}
                             {/* <div id="third-party-auth" className="flex justify-center gap-4 mt-5">

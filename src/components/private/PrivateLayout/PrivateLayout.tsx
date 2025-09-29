@@ -10,7 +10,6 @@ import AppNavbar from '@/components/private/AppNavbar/AppNavbar';
 import SideMenu from '@/components/private/SideMenu/SideMenu';
 import Header from '@/components/private/Header/Header';
 import AppTheme from '@/utils/theme/AppTheme';
-import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
 import Copyright from "@/components/private/copyright/copyright";
 
 interface PrivateLayoutProps {
@@ -19,7 +18,6 @@ interface PrivateLayoutProps {
 }
 
 const PageContent = ({ children, disableCustomTheme }: PrivateLayoutProps) => {
-    const { theme } = useTheme();
     const xThemeComponents = {
         ...chartsCustomizations,
         ...datePickersCustomizations,
@@ -27,7 +25,7 @@ const PageContent = ({ children, disableCustomTheme }: PrivateLayoutProps) => {
     }
 
     return (
-        <AppTheme disableCustomTheme={disableCustomTheme} themeComponents={xThemeComponents} mode={theme}>
+        <AppTheme disableCustomTheme={disableCustomTheme} themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
             <Box sx={{ display: 'flex' }}>
                 <SideMenu />

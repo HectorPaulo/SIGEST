@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { isAuthenticated } from '@/utils/auth/autenticacion';
+import { isAuthenticated, clearAllAuthData } from '@/utils/auth/autenticacion';
 import { useUser } from '@/utils/context/UserContext/UserContext';
+import { useAuthWithAlerts } from '@/hooks/useAuthWithAlerts/useAuthWithAlerts';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -14,13 +15,24 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
     const router = useRouter();
     const { user, setUser } = useUser();
+    const { validateToken } = useAuthWithAlerts();
 
     useEffect(() => {
-        const checkAuth = async () => {
+        const checkAuth = () => {
             try {
                 // Verificar si hay datos básicos de autenticación (solo verificación local)
                 if (!isAuthenticated()) {
                     console.log('Usuario no autenticado, redirigiendo al login');
+                    router.push('/auth/login');
+                    return;
+                }
+
+                // Validar el token con alertas automáticas
+                console.log('Verificando validez del token...');
+                const isValidToken = validateToken();
+
+                if (!isValidToken) {
+                    console.log('Token inválido o expirado, redirigiendo al login');
                     router.push('/auth/login');
                     return;
                 }
@@ -30,22 +42,20 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
                     const storedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
                     if (storedUser) {
                         try {
-                            setUser(JSON.parse(storedUser));
+                            const parsedUser = JSON.parse(storedUser);
+                            console.log('Cargando usuario desde storage:', parsedUser);
+                            setUser(parsedUser);
                         } catch (error) {
                             console.error('Error parseando usuario del storage:', error);
                             // Limpiar datos corruptos y redirigir
-                            localStorage.removeItem('token');
-                            localStorage.removeItem('refreshToken');
-                            localStorage.removeItem('user');
-                            sessionStorage.removeItem('token');
-                            sessionStorage.removeItem('refreshToken');
-                            sessionStorage.removeItem('user');
+                            clearAllAuthData();
                             router.push('/auth/login');
                             return;
                         }
                     }
                 }
 
+                console.log('Autenticación verificada exitosamente');
                 setIsAuthorized(true);
             } catch (error) {
                 console.error('Error verificando autenticación:', error);
@@ -56,7 +66,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         };
 
         checkAuth();
-    }, [router, user, setUser]);
+    }, [router, user, setUser, validateToken]);
 
     if (isLoading) {
         return (

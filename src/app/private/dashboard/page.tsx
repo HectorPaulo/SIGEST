@@ -15,10 +15,7 @@ import MainGrid from '@/components/private/MainGrid/MainGrid';
 import SideMenu from '@/components/private/SideMenu/SideMenu';
 import Header from '@/components/private/Header/Header';
 import AppTheme from '@/utils/theme/AppTheme';
-import { useTheme } from '@/utils/context/ThemeContext/ThemeContext';
-
-function PageContent(props: { disableCustomTheme?: boolean }) {
-    const { theme } = useTheme();
+function PageContent() {
     const xThemeComponents = {
         ...chartsCustomizations,
         // ...dataGridCustomizations,
@@ -27,7 +24,7 @@ function PageContent(props: { disableCustomTheme?: boolean }) {
     };
 
     return (
-        <AppTheme {...props} themeComponents={xThemeComponents} mode={theme}>
+        <AppTheme themeComponents={xThemeComponents}>
             <CssBaseline enableColorScheme />
             <Box sx={{ display: 'flex' }}>
                 <SideMenu />
