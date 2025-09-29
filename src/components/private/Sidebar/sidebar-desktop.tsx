@@ -8,14 +8,24 @@ import Image from 'next/image';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { LogOut, Settings } from 'lucide-react';
+import { LogOut, Settings, Home, List, FileText, FileStack, User as UserIcon, Users } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import {SidebarItems} from "@/types/SidebarItem";
-import {logout} from "@/utils/auth/autenticacion";
-import {Alert, AlertTitle} from "@mui/material";
-import {useUser} from "@/utils/context/UserContext/UserContext";
-import {GetUserByEmail} from "@/lib/Controllers/UsersController";
-import {User} from "@/types/user";
+import { SidebarItems } from "@/types/SidebarItem";
+import { logout } from "@/utils/auth/autenticacion";
+import { Alert, AlertTitle } from "@mui/material";
+import { useUser } from "@/utils/context/UserContext/UserContext";
+import { GetUserByEmail } from "@/lib/Controllers/UsersController";
+import { User } from "@/types/user";
+
+// Mapeo de strings a iconos de Lucide
+const iconMap = {
+    'Home': Home,
+    'List': List,
+    'FileText': FileText,
+    'FileStack': FileStack,
+    'User': UserIcon,
+    'Users': Users,
+} as const;
 
 interface SidebarDesktopProps {
     sidebarItems: SidebarItems;
@@ -24,6 +34,9 @@ interface SidebarDesktopProps {
 export function SidebarDesktop(props: SidebarDesktopProps) {
     const pathname = usePathname();
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
+
+    // Debug temporal - ver ruta actual
+    console.log('Current pathname:', pathname);
     const [alertType, setAlertType] = useState<"success" | "error" | "attention" | null>(null);
     const router = useRouter();
     const { user, setUser } = useUser();
@@ -45,7 +58,7 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            if (!(user.email && user)) {
+            if (!(user && user.email)) {
                 return;
             }
             try {
@@ -62,31 +75,31 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
             }
         };
         fetchUserData();
-    }, [user]);
+    }, [user, setUser]);
 
     const showUserInfo = [
-        '/dashboard/area',
-        '/dashboard/area/create',
-        '/dashboard/area/edit',
-        '/dashboard/empleado',
-        '/dashboard/empleado/create',
-        '/dashboard/empleado/edit',
-        '/dashboard/inventario',
-        '/dashboard/inventario/create',
-        '/dashboard/inventario/edit',
-        '/dashboard/vales',
-        '/dashboard/vales/create',
-        '/dashboard/vales/edit',
-        '/dashboard/bitacora',
-        '/dashboard/bitacora/create',
-        '/dashboard/bitacora/edit',
+        '/private/dashboard/area',
+        '/private/dashboard/area/create',
+        '/private/dashboard/area/edit',
+        '/private/dashboard/empleado',
+        '/private/dashboard/empleado/create',
+        '/private/dashboard/empleado/edit',
+        '/private/dashboard/inventario',
+        '/private/dashboard/inventario/create',
+        '/private/dashboard/inventario/edit',
+        '/private/dashboard/vales',
+        '/private/dashboard/vales/create',
+        '/private/dashboard/vales/edit',
+        '/private/dashboard/bitacora',
+        '/private/dashboard/bitacora/create',
+        '/private/dashboard/bitacora/edit',
     ].some((path) => pathname.startsWith(path));
 
     return (
         <aside className='bg-white max-w-xs h-screen fixed left-0 top-0 z-40 border-r overflow-y-auto'>
             <div className='h-full px-4 py-5 flex flex-col justify-between'>
                 <div>
-                    <Link href={'/dashboard'}>
+                    <Link href={'/private/dashboard'}>
                         <Image
                             className='cursor-pointer flex justify-center'
                             src="/assets/institucional/logo_texto.png"
@@ -101,9 +114,14 @@ export function SidebarDesktop(props: SidebarDesktopProps) {
                                 <Link key={index} href={link.href}>
                                     <SidebarButton
                                         variant='ghost'
-                                        icon={link.icon}
+                                        icon={link.icon ? iconMap[link.icon as keyof typeof iconMap] : undefined}
                                         className='w-full my-4 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-700 hover:scale-105 transition-all duration-200'
-                                        isActive={link.href === '/dashboard' ? pathname === link.href : pathname.startsWith(link.href)}
+                                        isActive={(() => {
+                                            if (link.href === '/private/dashboard') {
+                                                return pathname === '/private/dashboard';
+                                            }
+                                            return pathname.startsWith(link.href);
+                                        })()}
                                     >
                                         {link.label}
                                     </SidebarButton>

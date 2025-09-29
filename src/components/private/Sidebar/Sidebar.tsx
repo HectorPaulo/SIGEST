@@ -1,14 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-    Home,
-    List,
-    FileText,
-    FileStack,
-    User,
-    Users,
-} from 'lucide-react';
 import { SidebarDesktop } from './sidebar-desktop';
 import { useMediaQuery } from 'usehooks-ts';
 import { SidebarMobile } from './sidebar-mobile';
@@ -16,16 +8,16 @@ import { SidebarItems } from '@/types/SidebarItem';
 
 const sidebarItems: SidebarItems = {
     links: [
-        { label: 'Inicio', href: '/dashboard', icon: 'Home' },
-        { label: 'Roles', href: '/dashboard/roles', icon: 'User' },
-        { label: 'Area', href: '/dashboard/area', icon: 'Users' },
-        { label: 'Usuarios', href: '/dashboard/users', icon: 'Users' },
-        { label: 'Funciones', href: '/dashboard/funciones', icon: 'User' },
-        { label: 'Empleado', href: '/dashboard/empleado', icon: 'User' },
-        { label: 'Inventario', href: '/dashboard/inventario', icon: 'List' },
-        { label: 'Vales', href: '/dashboard/vales', icon: 'FileText' },
-        { label: 'Bitácora', href: '/dashboard/bitacora', icon: 'FileStack' },
-        { label: 'Archivos', href: '/dashboard/archivos', icon: 'FileStack' },
+        { label: 'Inicio', href: '/private/dashboard', icon: 'Home' },
+        { label: 'Roles', href: '/private/dashboard/roles', icon: 'User' },
+        { label: 'Area', href: '/private/dashboard/area', icon: 'Users' },
+        { label: 'Usuarios', href: '/private/dashboard/users', icon: 'Users' },
+        { label: 'Funciones', href: '/private/dashboard/funciones', icon: 'User' },
+        { label: 'Empleado', href: '/private/dashboard/empleado', icon: 'User' },
+        { label: 'Inventario', href: '/private/dashboard/inventario', icon: 'List' },
+        { label: 'Vales', href: '/private/dashboard/vales', icon: 'FileText' },
+        { label: 'Bitácora', href: '/private/dashboard/bitacora', icon: 'FileStack' },
+        { label: 'Archivos', href: '/private/dashboard/archivos', icon: 'FileStack' },
     ],
 };
 
@@ -72,7 +64,7 @@ export function Sidebar({ onSidebarToggle }: SidebarProps) {
                     {/*  />*/}
                     {/*</Link>*/}
                     <div className=" flex bg-blue-950 w-10 h-16 self-start mt-20 rounded-r-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#fff" className="text-bold my-auto "><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="#fff" className="text-bold my-auto "><path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" /></svg>
                     </div>
                 </div>
                 {/* Sidebar */}
