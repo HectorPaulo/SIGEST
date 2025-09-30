@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import GenericForm from '@/components/private/GenericForm/GenericForm'
 import { userConfig } from '@/lib/config/entityConfigs'

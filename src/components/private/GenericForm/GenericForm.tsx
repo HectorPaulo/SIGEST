@@ -28,7 +28,7 @@ export interface GenericFormState<T extends BaseEntity> {
 export type FormFieldValue = string | string[] | number | boolean | File | null;
 
 export interface GenericFormProps<T extends BaseEntity> {
-    formState: GenericFormState<T>;
+    // formState: GenericFormState<T>;
     formFields: FormFieldConfig[];
     onFieldChange: (name: string, value: FormFieldValue) => void;
     onSubmit: (formValues: Partial<EntityInsert<T>>) => Promise<void>;

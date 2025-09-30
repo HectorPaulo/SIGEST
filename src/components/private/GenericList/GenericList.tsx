@@ -160,7 +160,7 @@ function GenericList<T extends BaseEntity>({ config }: GenericListProps<T>) {
     const handleRowDelete = React.useCallback(
         (item: T) => async () => {
             const confirmed = await dialogs.confirm(
-                `¿Desea eliminar este ${config.entityName.toLowerCase()}?`,
+                `¿Des ea eliminar este ${config.entityName.toLowerCase()}?`,
                 {
                     title: `¿Eliminar ${config.entityName.toLowerCase()}?`,
                     severity: 'error',

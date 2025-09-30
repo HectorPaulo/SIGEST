@@ -1,0 +1,901 @@
+{
+	"info": {
+		"_postman_id": "cbc51786-5100-4aa3-b1cf-dbafb20aff20",
+		"name": "MICROSERVICES UPN SICI SIGI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36910961",
+		"_collection_link": "https://equipo-9631.postman.co/workspace/Team-Workspace~3c7c8a49-8308-40b5-8b31-d4433ff53e1c/collection/36910961-cbc51786-5100-4aa3-b1cf-dbafb20aff20?action=share&source=collection_link&creator=36910961"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"devpaulo\",\r\n    \"password\" : \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8072/upn201/gatewayserver/api/keycloak/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\" : \"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI3NzMzMDExNy0zMzdmLTQ1OWUtODdiZC0zNTY3MzdmZGYxMGMifQ.eyJleHAiOjE3NDU5NDE4MTEsImlhdCI6MTc0NTk0MDAxMSwianRpIjoiNjQ5N2MxNmItOWM2Ni00YzMxLTkwYTItM2QwMDA4ZDBiMDMzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2Iiwic3ViIjoiZDRiOTllMGEtOTM4Zi00YmExLTk2YzMtNWNjZDg2Y2I0OWY5IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6InVwbjIwMSIsInNpZCI6ImJmYzc1ZjEzLTU2ZGItNGJlZi1hNzkzLTkzY2YxZGFhYWRiNSIsInNjb3BlIjoid2ViLW9yaWdpbnMgYmFzaWMgcHJvZmlsZSBzZXJ2aWNlX2FjY291bnQgYWNyIGVtYWlsIHJvbGVzIn0.Ow66UBJZ3f9IHcvZQc4oxdops1tWNCOli5Dv2hO-_zu35YVgFb657Q6aBWm3qbBdn3C-HtM1B6u_3Qk38Xw0cQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8072/upn201/gatewayserver/api/keycloak/auth/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USUARIOS",
+			"item": [
+				{
+					"name": "USUARIOS",
+					"item": [
+						{
+							"name": "Actualizar Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDA1NTIsImlhdCI6MTc0NjIwMDI1MiwianRpIjoiMDkxZDgxNTUtYWI2OS00NjBhLTgzNGYtYzJiMWZiM2I3ZWY2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6IjYwYjQ4NGFlLTUyZjMtNGEwMS1iMjcyLWY0YWI4NWViOWZiMSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImEzMWM2ZTdhLTkxNDMtNGY5Mi1iNmNhLTBlOWRiZWM1ZGZhOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFkbWluLXJlYWxtLXJvbCIsImRlZmF1bHQtcm9sZXMtc3ByaW5nLWJvb3QtdXBuLXJlYWxtLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19LCJ1cG4yMDEiOnsicm9sZXMiOlsiYWRtaW4tdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgWW9zZWYgR2FyY8OtYSBTYW50aWFnbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImRldmRhbmllbCIsImdpdmVuX25hbWUiOiJEYW5pZWwgWW9zZWYiLCJmYW1pbHlfbmFtZSI6IkdhcmPDrWEgU2FudGlhZ28iLCJlbWFpbCI6ImRhbmllbHlvc2VmNzc3QGdtYWlsLmNvbSJ9.kRQyhm-a2tkNxJZtPbU-zB_NlZ2zlx8PzhmyX4D67Vj7smnzi3HLh4AdTOmORxKkelNeqGBxVE6-8xPBkCn_8cIO_6Y4NRHAyI52oWkcEqhmm3bKIiqOGJgZPKBz2OqTfGH1eEXrvvhUGkREXOT0kNDhITdkLlveHjUrTzTFIOKYygMV3L6KbUyx6R-zSgsQISXvRA1RORpHH63VxnznKs_OI3TPeANWV24BlfuVdnuUj2fqN1WbfT5FLLd0m8VLt9mOLsZuifIbDiyTr8XILpolmvl3RtpnXxDaW3aFE4dBkAnMGcx2PHhNK9E5w7Tj0bY1w7kw-Q77lQHEwnqAlA"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Daniel Yosef\",\r\n    \"apellidoPaterno\" : \"Santiago\",\r\n    \"apellidoMaterno\" : \"García\",\r\n    \"email\" : \"danielyosef777@gmail.com\",\r\n    \"usernamePersonalizado\" : \"devdaniel777\",\r\n    \"password\" : \"1234\",\r\n    \"roles\" : [\"admin\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/keycloak/user/update?id=60b484ae-52f3-4a01-b272-f4ab85eb9fb1",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"keycloak",
+										"user",
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "60b484ae-52f3-4a01-b272-f4ab85eb9fb1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por UUID",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDAxMjQsImlhdCI6MTc0NjE5OTgyNCwianRpIjoiZWE5NmIyNjYtNWVkNy00YWUxLWFmYmUtZTJmMWNjMTFkZWVjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNhZjJhOThmLTVjZjQtNGYzOS1iZWQ3LWVjMTUwMWFkODlkNiIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImNjYzllOWU0LWI3ZWItNDFiNS05YmQyLWY5ODExNDBhZmU0ZSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsidXNlci1yZWFsbS1yb2wiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2Il19LCJyZXNvdXJjZV9hY2Nlc3MiOnsidXBuMjAxIjp7InJvbGVzIjpbInVzZXItdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgWW9zZWYgR2FyY8OtYSBTYW50aWFnbyIsInByZWZlcnJlZF91c2VybmFtZSI6ImRldmRhbmllbCIsImdpdmVuX25hbWUiOiJEYW5pZWwgWW9zZWYiLCJmYW1pbHlfbmFtZSI6IkdhcmPDrWEgU2FudGlhZ28iLCJlbWFpbCI6ImRhbmllbHlvc2VmNzc3QGdtYWlsLmNvbSJ9.jZM4FbuDk5ykHwhSS7hAsTdE4E6amABKhCRQyWfFWBVQjIUH-aaSKCU8kgMzjsRFsNP4XRXM_8Z6uZCJLESIt_owtNyGNkaX-RUxemGAp0qExC2m0rZuIP5YL2FsMMvoveKO3C74SOc_l67k_MPtZUOK6YnZpXpr4HL_JsJ9jg0gVtubU2QToowZVlipcy18VVet_5pUYbOlla5b1AJ7HuDFLtGIgAnhnitGUuWGeo-VlocDzyO5faJKRZn3HZrNlRYRfAE-rlU061a9XpC_PWdIhj4RH2FMMlAoMJZwDWKROpDstHWQLmuVqBKcejkmkHvy2aCPhD-5Lu_ctWP7KA"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/usuarios/find-by-uuid-keycloak?uuidKeycloak=3af2a98f-5cf4-4f39-bed7-ec1501ad89d6",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"usuarios",
+										"find-by-uuid-keycloak"
+									],
+									"query": [
+										{
+											"key": "uuidKeycloak",
+											"value": "3af2a98f-5cf4-4f39-bed7-ec1501ad89d6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYyMDAyNjQsImlhdCI6MTc0NjE5OTk2NCwianRpIjoiNTJjOTM1YjctOTkwMy00MGI0LWIzMDYtOWIyNjhjMDI2OTEwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjpbInJlYWxtLW1hbmFnZW1lbnQiLCJhY2NvdW50Il0sInN1YiI6Ijg5MmIxZmQ2LWMzMTMtNGVhZS05YWI4LWIxMzAxYjdiMzEyNyIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6IjYwODE0NDNmLTUzZWItNGE1OC1hOTc5LWUwZjU2ZDczYTlkZCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFkbWluLXJlYWxtLXJvbCIsImRlZmF1bHQtcm9sZXMtc3ByaW5nLWJvb3QtdXBuLXJlYWxtLWRldiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7InJlYWxtLW1hbmFnZW1lbnQiOnsicm9sZXMiOlsibWFuYWdlLXVzZXJzIiwidmlldy11c2VycyIsInF1ZXJ5LWdyb3VwcyIsInF1ZXJ5LXVzZXJzIl19LCJ1cG4yMDEiOnsicm9sZXMiOlsiYWRtaW4tdXBuLXJvbCJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJhZG1pbiBhZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6ImFkbWluIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIn0.juf_kZz9vKdgE4VIKvzSTLT72cLO9QDFryHqFjpKd4ZkKCrRolPAFfrJCj-zXopjTOt61uI1qjNx2hJN8p825zkfjJglrCCkGUKoDRZjZc49XSA91sTzF9Ahw13MiKTDBjcqkOkg2cnKUxtLe_bwxQYtcscU9yKUKIkJrrc8gd9kVgqGIYLQVBQGsLm_FulV8pA6yiImhVwEnqPdk590z313Zvb-9WhQkN0uLhx6BYQWC3qezu_yBO7TeMM9lKaY0U6QrakRfx28o2Q9CYVcZpCkzTRAy8g9050xuElV5TiixXmlnB4J6u6Dpjz1STY2dWFJvGT7ghycqF07CDveXQ"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Daniel Yosef\",\r\n    \"apellidoPaterno\" : \"Santiago\",\r\n    \"apellidoMaterno\" : \"García\",\r\n    \"email\" : \"danielyosef777@gmail.com\",\r\n    \"username\" : \"devdaniel\",\r\n    \"password\" : \"1234\",\r\n    \"roles\" : [\"admin\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/keycloak/user/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Todos los Usuarios",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDcwNzE5MTYsImlhdCI6MTc0NzA3MTYxNiwianRpIjoiNzM3Mjc5Y2EtMjFlMy00MzRiLWIzZTktNDUyNTIxOGFhYjQ1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoicmVhbG0tbWFuYWdlbWVudCIsInN1YiI6ImQ0Yjk5ZTBhLTkzOGYtNGJhMS05NmMzLTVjY2Q4NmNiNDlmOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6IjE3ZGE4Y2QwLTc4YWEtNDhiNi04NDVmLTg5MDhlNTkyNDhkZCIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tcmVhbG0tcm9sIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwicXVlcnktZ3JvdXBzIiwicXVlcnktdXNlcnMiXX0sInVwbjIwMSI6eyJyb2xlcyI6WyJhZG1pbi11cG4tcm9sIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgR2FyY2lhIFNhbnRpYWdvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZGFuaWVsMiIsImdpdmVuX25hbWUiOiJEYW5pZWwiLCJmYW1pbHlfbmFtZSI6IkdhcmNpYSBTYW50aWFnbyIsImVtYWlsIjoiZGFuaWVsQGdtYWlsLmNvbSJ9.cx4ITxmF08qR8cLq6xMvfo7s8EmFj--33FfKAynF9N_VGT8-aGTmntz7uOIpUWStj0J965TtzAgMGfOEpfNqIhpjhD8VMY-xqyKCxdYbfVXs6UnBkiRj4vtJn9uJizE5vIDgBv3LN4ckPjItCzBkZm0IS7KrYGulUExnso9FZk6WhZjcdT31S_oJqLFU2LnorAGluxnzZP7vq7EVmyY68qcpYX5qHae0kAzKdJ_oEtb1bJakZ-ZM6rLFAldJEeD7nOvjTRvwGATuY_a-CgFJy0o8WriX4M022TA7ksKQTEfXPviDuHXo6lNBdWLPUD2eFtXBQI4xKb_66BsK-wHR7A"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/usuarios/find-all"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "IMAGENES",
+					"item": [
+						{
+							"name": "Foto de perfil por defecto",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYwMzI1OTgsImlhdCI6MTc0NjAzMjI5OCwianRpIjoiNTBiNDUxMGUtNDA5YS00ZjE4LTk0N2ItMzE1ZmYyMTFmZmUyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoicmVhbG0tbWFuYWdlbWVudCIsInN1YiI6ImQ0Yjk5ZTBhLTkzOGYtNGJhMS05NmMzLTVjY2Q4NmNiNDlmOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6Ijc0NmNmMDcwLWQwY2EtNDM2OS04MWY2LTkzYWNjMDA1YjBjNiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tcmVhbG0tcm9sIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwicXVlcnktZ3JvdXBzIiwicXVlcnktdXNlcnMiXX0sInVwbjIwMSI6eyJyb2xlcyI6WyJhZG1pbi11cG4tcm9sIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgR2FyY2lhIFNhbnRpYWdvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZGFuaWVsMiIsImdpdmVuX25hbWUiOiJEYW5pZWwiLCJmYW1pbHlfbmFtZSI6IkdhcmNpYSBTYW50aWFnbyIsImVtYWlsIjoiZGFuaWVsQGdtYWlsLmNvbSJ9.TMeLwYPMrfpv4xkJWVV-DBpXzAJzJYQgf1E6jBLNUJXyeDykqt-l6XihHcv78BofSyozgRCI02qeCDf3PwZMPn2NtlGW7IpXJZovRoLxlqfHqLlarKlz9PsXC_g3xS9MmUFOoF1UUvhp9UKHkccHfhHYQ4zM68E8zIQv_VNUWzpDVvlVBWvt9ookeY9DcCLpUzJT6g2F9yuKHpkPFChHr9NJOdVa8pvZ_0WUbYCkPdlT6di0XzgxXF5ACwni2wOAdBlVjYKWXn5EpHluIa-nuxXQZ2y1Q2xeyUhOXKSfZh6pCOitfLkHS12CtgmL1W0jdDhShdYHIgJBkhcMjDg3wQ"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/usuarios/profile-picture/default"
+							},
+							"response": []
+						},
+						{
+							"name": "Guardar Foto de Perfil",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFclhkeFBrc01WQm9qYWRCVU9ScnZlRE1vMXhVQ0ZkWHpwRl9YS0tkb3dVIn0.eyJleHAiOjE3NDYwMzI5ODYsImlhdCI6MTc0NjAzMjY4NiwianRpIjoiY2M5NjhkMDQtMGVjYy00OWZiLWFhMGUtMTA1YTUxZWI4ZmMxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDkwL3JlYWxtcy9zcHJpbmctYm9vdC11cG4tcmVhbG0tZGV2IiwiYXVkIjoicmVhbG0tbWFuYWdlbWVudCIsInN1YiI6ImQ0Yjk5ZTBhLTkzOGYtNGJhMS05NmMzLTVjY2Q4NmNiNDlmOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InVwbjIwMSIsInNpZCI6ImNmYTJjMmI0LTU0MGItNDUzOC1hZjUyLTQ3ZjQyMzRjNDAwYyIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tcmVhbG0tcm9sIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJtYW5hZ2UtdXNlcnMiLCJ2aWV3LXVzZXJzIiwicXVlcnktZ3JvdXBzIiwicXVlcnktdXNlcnMiXX0sInVwbjIwMSI6eyJyb2xlcyI6WyJhZG1pbi11cG4tcm9sIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJEYW5pZWwgR2FyY2lhIFNhbnRpYWdvIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGV2ZGFuaWVsMiIsImdpdmVuX25hbWUiOiJEYW5pZWwiLCJmYW1pbHlfbmFtZSI6IkdhcmNpYSBTYW50aWFnbyIsImVtYWlsIjoiZGFuaWVsQGdtYWlsLmNvbSJ9.EC4SPSSiBYm-4B4lXu7uCV5TOSuYXt9xzpcTcJuZ7kayPV2VZ3b8PbrHDbqxOdBSHTsADkyL91Cl1DTR449ZoTQkq6xV8Zuh0H14qEELarzTbn_BLeS3JralINbjL7fm9xnOtiHNM8TmLzNnI3ljjA6VoEY5KFyvLM3dXtrK79AkwxGgimVmk2W-0BFZ83spxzfImS4mM2amRbSzqteujvyN542-aMnAGjETNxyfEXQoylG7A-GFV9tgNEz4o4qOiGf3LqogxlTJzLDobpdAbhc9yyljcmsFu6XS87LzfEQcaxnnhUKMj1Po2D3SWW7JopRN_xmQwPWIrAXAUREE3g"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/Daniel Santiago/Downloads/MESSI.jpg"
+										}
+									]
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/usuarios/profile-picture/f556335b-2b0c-44a7-8984-a9c721d23b7b"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "SICI",
+			"item": [
+				{
+					"name": "INVENTARIO",
+					"item": [
+						{
+							"name": "Crear Inventario",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Laptop\",\r\n    \"marca\" : \"Asus\",\r\n    \"modelo\" : \" Rog Zephyrus G16\",\r\n    \"descripcion\" : \"Ryzen 7 5000, Nvidia RTX 3050\",\r\n    \"numeroDeSerie\" : \"abcd123456\",\r\n    \"fechaDeAlta\" : \"2025-04-24\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/inventario/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Inventario",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Laptop\",\r\n    \"marca\" : \"Asus\",\r\n    \"modelo\" : \" Rog Zephyrus G16\",\r\n    \"descripcion\" : \"Ryzen 7 5000, Nvidia RTX 3050\",\r\n    \"numeroDeSerie\" : \"abcd123456\",\r\n    \"fechaDeAlta\" : \"2025-04-24\",\r\n    \"fechaDeBaja\" : \"2025-04-24\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/inventario/update?id=121",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"inventario",
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "121"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/inventario/find-all"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por Id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/inventario/find-by-id?id=121",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"inventario",
+										"find-by-id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "121"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deshabilitar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/inventario/deshabilitar?id=121",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"inventario",
+										"deshabilitar"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "121"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "VALE",
+					"item": [
+						{
+							"name": "Crear Vale",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descripcion\" : \"Se requirió una laptop para un practicante\",\r\n    \"comentario\" : \"Algún comentario\",\r\n    \"inventarioId\" : 100,\r\n    \"areaAsignadaId\" : 100,\r\n    \"empleadoEntregaId\" : 100,\r\n    \"fechaAlta\" : \"2025-04-12\",\r\n    \"empleadoAutorizaId\" : 100,\r\n    \"empleadoRecibeId\" : 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/vale/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos los vales",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/vale/find-all"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Vale por ID",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/vale/find-by-id?id=100",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"vale",
+										"find-by-id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EMPLEADOS",
+			"item": [
+				{
+					"name": "EMPLEADO",
+					"item": [
+						{
+							"name": "Crear Empleado",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Diego\",\r\n    \"apellidoPaterno\" : \"Sosa Ramirez\",\r\n    \"apellidoMaterno\" : \"Vazquez\",\r\n    \"clave\" : \"SORD040501HOCNRNA2\",\r\n    \"areaId\" : 100,\r\n    \"rolId\" : 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/empleados/empleado/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Empleado",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Daniel Yosef\",\r\n    \"apellidoPaterno\" : \"Santiago\",\r\n    \"apellidoMaterno\" : \"Garcia\",\r\n    \"clave\" : \"SAGD040501HOCNRNA2\",\r\n    \"areaId\" : 100,\r\n    \"rolId\" : 105\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/empleado/update?id=101",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"empleado",
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos los Empleados",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/empleado/find-all"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por Id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/empleados/empleado/find-by-id?id=100",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"empleados",
+										"empleado",
+										"find-by-id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deshabilitar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/empleado/deshabilitar?id=101",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"empleado",
+										"deshabilitar"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AREA",
+					"item": [
+						{
+							"name": "Crear Area",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Sistemas\",\r\n    \"descripcion\" : \"Area de Sistemas de la UPN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/empleados/area/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Area",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Sistemas\",\r\n    \"descripcion\" : \"Area de Sistemas de la UPN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/empleados/update?id=100",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"empleados",
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Todos",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/empleados/area/find-all"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar por Id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/empleados/area/find-by-id?id=100",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"empleados",
+										"area",
+										"find-by-id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deshabilitar Area",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/area/deshabilitar?id=100",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"area",
+										"deshabilitar"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ROL",
+					"item": [
+						{
+							"name": "Crear Rol",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"Crear\",\r\n    \"descripcion\" : \"El usuario puede crear registros\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8072/upn201/gatewayserver/api/empleados/rol/create"
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Rol",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\" : \"DIOS\",\r\n    \"descripcion\" : \"El usuario puede hacer lo que se le salga de los huevos\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/rol/update?id=105",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"rol",
+										"update"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "105"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos los Roles",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": "localhost:8072/upn201/gatewayserver/api/sici/rol/find-all"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar Por Id",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/rol/find-by-id?id=105",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"rol",
+										"find-by-id"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "105"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deshabilitar Rol",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8072/upn201/gatewayserver/api/sici/rol/deshabilitar?id=105",
+									"host": [
+										"localhost"
+									],
+									"port": "8072",
+									"path": [
+										"upn201",
+										"gatewayserver",
+										"api",
+										"sici",
+										"rol",
+										"deshabilitar"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "105"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

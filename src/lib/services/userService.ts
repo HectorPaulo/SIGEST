@@ -8,7 +8,7 @@ import type {
 import {
   CreateUser,
   UpdateUser,
-  GetAllUsers,
+    GetAllUsers,
   GetUserById,
   DeleteUser,
 } from "@/lib/Controllers/UsersController";
@@ -26,13 +26,13 @@ async function getMany({
     const response = await GetAllUsers();
     let users: User[] = response.data || [];
 
-    // Asegurarse de que todos los elementos tengan id como string
+    // * Asegurarse de que todos los elementos tengan id como string
     users = users.map((user) => ({
       ...user,
       id: String(user.id),
     }));
 
-    // Apply filters
+    // * Aplicar filtros
     if (filterModel?.items?.length) {
       filterModel.items.forEach(({ field, value, operator }) => {
         if (!field || value == null) {

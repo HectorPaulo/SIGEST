@@ -23,7 +23,6 @@ async function getMany({
         const serverData = await GetAllAreas();
         let areas: Area[] = serverData;
 
-        // Asegurarse de que todos los elementos tengan id como string
         areas = areas.map(area => ({
             ...area,
             id: String(area.id),
@@ -82,8 +81,8 @@ async function getMany({
             itemCount: filteredItems.length,
         };
     } catch (error) {
-        console.error('Error fetching areas:', error);
-        throw new Error('Failed to fetch areas');
+        console.error('Error encontrando areas:', error);
+        throw new Error('Error al encontrar areas');
     }
 }
 

@@ -27,7 +27,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             storedUser = sessionStorage.getItem("user");
         }
 
-        console.log('getUserFromStorage - Usuario encontrado:', storedUser);
 
         if (storedUser) {
             try {
@@ -45,17 +44,13 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const [user, setUser] = useState<User | undefined>(() => {
         const initialUser = getUserFromStorage();
-        console.log('UserProvider - Usuario inicial:', initialUser);
         return initialUser;
     });
 
     useEffect(() => {
         const storedUser = getUserFromStorage();
-        console.log('UserProvider useEffect - Usuario en storage:', storedUser);
-        console.log('UserProvider useEffect - Usuario actual en estado:', user);
 
         if (storedUser && !user) {
-            console.log('UserProvider - Cargando usuario en useEffect:', storedUser);
             setUser(storedUser);
         }
     }, [user]);

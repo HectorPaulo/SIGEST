@@ -24,7 +24,7 @@ const mainListItems = [
     { text: 'Empleados', icon: <AssignmentIndIcon />, route: '/private/empleados' },
     { text: 'Roles', icon: <CommitTwoToneIcon />, route: '/private/roles' },
     { text: 'Áreas', icon: <ApartmentRoundedIcon />, route: '/private/areas' },
-    { text: 'Inventario', icon: <Inventory2RoundedIcon />, route: '/private/inventario' },
+    { text: 'Inventario', icon: <Inventory2RoundedIcon />, route: '/private/inventarios' },
     { text: 'Vales', icon: <ReceiptLongRoundedIcon />, route: '/private/vales' },
     { text: 'Usuarios', icon: <SupervisedUserCircleRoundedIcon />, route: '/private/usuarios' },
 ];

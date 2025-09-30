@@ -31,7 +31,7 @@ export const UpdateEmpleado = async (id: number, data: Empleado) => {
 export const GetAllEmpleados = async () => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/empleado/find-all`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/empleados/empleado/find-all`;
   if (!token) throw new Error("Token no encontrado");
   const response = await axios.get(url, {
     headers: { Authorization: `Bearer ${token}` },

@@ -31,7 +31,7 @@ export const UpdateInventario = async (id: number, data: Inventario) => {
 export const GetAllInventario = async () => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/inventario/find-all`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/sici/inventario/find-all`;
   if (!token) throw new Error("Token no encontrado");
   const response = await axios.get(url, {
     headers: { Authorization: `Bearer ${token}` },

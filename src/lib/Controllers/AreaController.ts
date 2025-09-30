@@ -32,7 +32,7 @@ export const UpdateArea = async (id: number, data: Area) => {
 // Función para obtener todas las áreas
 export const GetAllAreas = async () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/area/find-all`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/empleados/area/find-all`;
     if (!token) throw new Error('Token no encontrado');
     const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
