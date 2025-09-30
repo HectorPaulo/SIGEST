@@ -29,7 +29,7 @@ export const UpdateRol = async (id: number, data: Rol) => {
 // Función para obtener todos los roles
 export const GetAllRoles = async () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/empleados/rol/find-all`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/rol/find-all`;
     if (!token) throw new Error('Token no encontrado');
     const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }

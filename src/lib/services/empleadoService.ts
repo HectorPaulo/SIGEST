@@ -32,7 +32,6 @@ async function getMany({
       ...empleado,
       id: String(empleado.id),
     }));
-
     let filteredItems = [...empleados];
 
     // Apply filters
@@ -116,14 +115,45 @@ async function getOne(empleadoId: string): Promise<Empleado> {
 
 async function createOne(data: EmpleadoInsert): Promise<Empleado> {
   try {
+    console.log("=== DEBUG: Datos que se van a enviar al crear empleado ===");
+    console.log("Data received in createOne:", JSON.stringify(data, null, 2));
+
+    // Validar que todos los campos requeridos estén presentes
+    const requiredFields = [
+      "nombre",
+      "apellidoPaterno",
+      "clave",
+      "areaId",
+      "rolId",
+    ];
+    const missingFields = requiredFields.filter(
+      (field) => !data[field as keyof EmpleadoInsert]
+    );
+
+    if (missingFields.length > 0) {
+      console.error("Campos faltantes:", missingFields);
+      throw new Error(
+        `Campos requeridos faltantes: ${missingFields.join(", ")}`
+      );
+    }
+
+    console.log(
+      "Todos los campos requeridos están presentes, enviando al controlador..."
+    );
     const newEmpleado = await CreateEmpleado(data);
+    console.log("Respuesta del servidor:", newEmpleado);
+
     return {
       ...newEmpleado,
       id: String(newEmpleado.id),
     };
   } catch (error) {
-    console.error("Error creating empleado:", error);
-    throw new Error("Failed to create empleado");
+    console.error("Error detallado al crear el empleado:", error);
+    if (error instanceof Error) {
+      console.error("Error message:", error.message);
+      console.error("Error stack:", error.stack);
+    }
+    throw error; // Re-lanzar el error original para más detalles
   }
 }
 
@@ -162,7 +192,9 @@ async function deleteOne(empleadoId: string): Promise<void> {
   }
 }
 
-function validate(empleado: Partial<Empleado>): ValidationResult {
+function validate(
+  empleado: Partial<Empleado> | Partial<EmpleadoInsert>
+): ValidationResult {
   let issues: ValidationResult["issues"] = [];
 
   if (!empleado.nombre || empleado.nombre.trim() === "") {
@@ -180,17 +212,39 @@ function validate(empleado: Partial<Empleado>): ValidationResult {
     issues = [...issues, { message: "Clave es requerida", path: ["clave"] }];
   }
 
-  if (!empleado.area || empleado.area.trim() === "") {
-    issues = [...issues, { message: "Área es requerida", path: ["area"] }];
+  // Check for areaId if it exists (EmpleadoInsert format)
+  if ("areaId" in empleado && !empleado.areaId) {
+    issues = [...issues, { message: "Área es requerida", path: ["areaId"] }];
+  }
+
+  // Check for rolId if it exists (EmpleadoInsert format)
+  if ("rolId" in empleado && !empleado.rolId) {
+    issues = [...issues, { message: "Rol es requerido", path: ["rolId"] }];
   }
 
   return { issues };
 }
 
+// Wrapper function to match the generic interface
+async function createOneWrapper(
+  data: EntityInsert<Empleado> & { areaId: number; rolId: number }
+): Promise<Empleado> {
+  // Convert the data to EmpleadoInsert format
+  const empleadoData: EmpleadoInsert = {
+    nombre: data.nombre,
+    apellidoPaterno: data.apellidoPaterno,
+    apellidoMaterno: data.apellidoMaterno,
+    clave: data.clave,
+    areaId: data.areaId,
+    rolId: data.rolId,
+  };
+  return createOne(empleadoData);
+}
+
 export const empleadoDataService: DataService<Empleado> = {
   getMany,
   getOne,
-  createOne,
+  createOne: createOneWrapper,
   updateOne,
   deleteOne,
   validate,

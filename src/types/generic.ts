@@ -38,6 +38,7 @@ export interface FormFieldConfig {
   type: "text" | "number" | "date" | "select" | "checkbox" | "textarea";
   required?: boolean;
   options?: { value: string | number; label: string }[];
+  optionsLoader?: () => Promise<{ value: string | number; label: string }[]>;
   gridSize?: { xs?: number; sm?: number; md?: number; lg?: number };
 }
 

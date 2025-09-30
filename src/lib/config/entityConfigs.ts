@@ -17,6 +17,61 @@ import { userDataService } from "@/lib/services/userService";
 import { valeDataService } from "@/lib/services/valeService";
 // import { bitacoraDataService } from "@/lib/services/bitacoraService";
 // import { archivoDataService } from "@/lib/services/archivoService";
+import { GetAllAreas } from "@/lib/Controllers/AreaController";
+import { GetAllRoles } from "@/lib/Controllers/RolController";
+
+// Funciones para obtener opciones dinámicas
+export const getAreaOptions = async () => {
+  try {
+    const areas = await GetAllAreas();
+    return areas.map((area: Area) => ({
+      value: area.id,
+      label: area.nombre,
+    }));
+  } catch (error) {
+    console.error("Error al obtener áreas:", error);
+    return [];
+  }
+};
+
+export const getRolOptions = async () => {
+  try {
+    const roles = await GetAllRoles();
+    return roles.map((rol: Rol) => ({
+      value: rol.id,
+      label: rol.nombre,
+    }));
+  } catch (error) {
+    console.error("Error al obtener roles:", error);
+    return [];
+  }
+};
+
+export const getRolClaveByName = async (rolNombre: string) => {
+  try {
+    const roles = await GetAllRoles();
+    const rol = roles.find((r: Rol) => r.nombre === rolNombre);
+    return rol?.clave || null;
+  } catch (error) {
+    console.error("Error al obtener clave de rol:", error);
+    return null;
+  }
+};
+
+// Función para manejar cambios en el campo rol y actualizar automáticamente rolClave
+export const handleRolChange = async (
+  rolNombre: string,
+  onFieldChange: (name: string, value: string | number) => void
+) => {
+  try {
+    const rolClave = await getRolClaveByName(rolNombre);
+    if (rolClave !== null) {
+      onFieldChange("rolClave", rolClave);
+    }
+  } catch (error) {
+    console.error("Error al actualizar clave de rol:", error);
+  }
+};
 
 export const areaConfig: EntityConfig<Area> = {
   entityName: "Área",
@@ -80,34 +135,21 @@ export const empleadoConfig: EntityConfig<Empleado> = {
       gridSize: { xs: 12, sm: 6 },
     },
     {
-      name: "area",
+      name: "areaId",
       label: "Área",
       type: "select",
       required: true,
-      options: [
-        { value: "Tecnología", label: "Tecnología" },
-        { value: "Recursos Humanos", label: "Recursos Humanos" },
-        { value: "Finanzas", label: "Finanzas" },
-      ],
+      options: [],
+      optionsLoader: getAreaOptions,
       gridSize: { xs: 12, sm: 6 },
     },
     {
-      name: "rolNombre",
+      name: "rolId",
       label: "Rol",
       type: "select",
       required: true,
-      options: [
-        { value: "Desarrollador", label: "Desarrollador" },
-        { value: "Analista RH", label: "Analista RH" },
-        { value: "Contador", label: "Contador" },
-      ],
-      gridSize: { xs: 12, sm: 6 },
-    },
-    {
-      name: "rolClave",
-      label: "Clave de Rol",
-      type: "number",
-      required: true,
+      options: [],
+      optionsLoader: getRolOptions,
       gridSize: { xs: 12, sm: 6 },
     },
   ],
@@ -117,9 +159,26 @@ export const empleadoConfig: EntityConfig<Empleado> = {
     { field: "apellidoPaterno", headerName: "Apellido Paterno", width: 140 },
     { field: "apellidoMaterno", headerName: "Apellido Materno", width: 140 },
     { field: "clave", headerName: "Clave", width: 100 },
-    { field: "area", headerName: "Área", width: 140 },
-    { field: "rolNombre", headerName: "Rol", width: 140 },
-    { field: "rolClave", headerName: "Clave Rol", type: "number", width: 100 },
+    {
+      field: "area",
+      headerName: "Área",
+      width: 140,
+      valueGetter: (value) => {
+        // value is the area object directly
+        if (!value || typeof value !== "object") return "N/A";
+        return value.nombre || "N/A";
+      },
+    },
+    {
+      field: "rol",
+      headerName: "Rol",
+      width: 140,
+      valueGetter: (value) => {
+        // value is the rol object directly
+        if (!value || typeof value !== "object") return "N/A";
+        return value.nombre || "N/A";
+      },
+    },
   ],
   defaultValues: {},
 };
@@ -310,7 +369,7 @@ export const userConfig: EntityConfig<User> = {
     {
       name: "email",
       label: "Email",
-      type: "email",
+      type: "text",
       required: true,
       gridSize: { xs: 12, sm: 6 },
     },
@@ -362,7 +421,7 @@ export const valeConfig: EntityConfig<Vale> = {
     {
       name: "hourDebited",
       label: "Hora",
-      type: "time",
+      type: "text",
       required: true,
       gridSize: { xs: 12, sm: 6 },
     },
@@ -453,7 +512,7 @@ export const bitacoraConfig: EntityConfig<Bitacora> = {
     {
       name: "hora",
       label: "Hora",
-      type: "time",
+      type: "text",
       required: true,
       gridSize: { xs: 12, sm: 6 },
     },

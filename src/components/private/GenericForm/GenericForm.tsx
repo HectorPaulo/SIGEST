@@ -54,6 +54,32 @@ export default function GenericForm<T extends BaseEntity>(props: GenericFormProp
     const router = useRouter();
 
     const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [dynamicOptions, setDynamicOptions] = React.useState<Record<string, { value: string | number; label: string }[]>>({});
+    const [loadingOptions, setLoadingOptions] = React.useState<Record<string, boolean>>({});
+
+    // Cargar opciones dinámicas
+    React.useEffect(() => {
+        const loadOptions = async () => {
+            const fieldsWithLoaders = formFields.filter(field => field.optionsLoader);
+
+            for (const field of fieldsWithLoaders) {
+                if (field.optionsLoader) {
+                    try {
+                        setLoadingOptions(prev => ({ ...prev, [field.name]: true }));
+                        const options = await field.optionsLoader();
+                        setDynamicOptions(prev => ({ ...prev, [field.name]: options }));
+                    } catch (error) {
+                        console.error(`Error cargando opciones para ${field.name}:`, error);
+                        setDynamicOptions(prev => ({ ...prev, [field.name]: [] }));
+                    } finally {
+                        setLoadingOptions(prev => ({ ...prev, [field.name]: false }));
+                    }
+                }
+            }
+        };
+
+        loadOptions();
+    }, [formFields]);
 
     const handleSubmit = React.useCallback(
         async (event: React.FormEvent<HTMLFormElement>) => {
@@ -188,6 +214,9 @@ export default function GenericForm<T extends BaseEntity>(props: GenericFormProp
                 );
 
             case 'select':
+                const options = dynamicOptions[field.name] || field.options || [];
+                const isLoadingFieldOptions = loadingOptions[field.name] || false;
+
                 return (
                     <FormControl error={!!fieldError} fullWidth required={field.required}>
                         <InputLabel>{field.label}</InputLabel>
@@ -198,12 +227,19 @@ export default function GenericForm<T extends BaseEntity>(props: GenericFormProp
                             label={field.label}
                             defaultValue=""
                             fullWidth
+                            disabled={isLoadingFieldOptions}
                         >
-                            {field.options?.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
+                            {isLoadingFieldOptions ? (
+                                <MenuItem disabled>
+                                    Cargando opciones...
                                 </MenuItem>
-                            ))}
+                            ) : (
+                                options.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))
+                            )}
                         </Select>
                         <FormHelperText>{fieldError ?? ' '}</FormHelperText>
                     </FormControl>
@@ -232,7 +268,7 @@ export default function GenericForm<T extends BaseEntity>(props: GenericFormProp
             default:
                 return null;
         }
-    }, [formValues, formErrors, handleTextFieldChange, handleNumberFieldChange, handleCheckboxFieldChange, handleDateFieldChange, handleSelectFieldChange]);
+    }, [formValues, formErrors, handleTextFieldChange, handleNumberFieldChange, handleCheckboxFieldChange, handleDateFieldChange, handleSelectFieldChange, dynamicOptions, loadingOptions]);
 
     return (
         <Box
