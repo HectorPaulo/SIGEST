@@ -108,6 +108,13 @@ export const empleadoConfig: EntityConfig<Empleado> = {
   dataService: empleadoDataService,
   formFields: [
     {
+      name: "clave",
+      label: "Clave",
+      type: "text",
+      required: true,
+      gridSize: { xs: 12, sm: 6 },
+    },
+    {
       name: "nombre",
       label: "Nombre",
       type: "text",
@@ -126,13 +133,6 @@ export const empleadoConfig: EntityConfig<Empleado> = {
       label: "Apellido Materno",
       type: "text",
       gridSize: { xs: 12, sm: 4 },
-    },
-    {
-      name: "clave",
-      label: "Clave",
-      type: "text",
-      required: true,
-      gridSize: { xs: 12, sm: 6 },
     },
     {
       name: "areaId",
@@ -154,11 +154,11 @@ export const empleadoConfig: EntityConfig<Empleado> = {
     },
   ],
   tableColumns: [
-    { field: "id", headerName: "ID", width: 80 },
+    { field: "id", headerName: "ID", width: 50 },
+    { field: "clave", headerName: "Clave", width: 120 },
     { field: "nombre", headerName: "Nombre", width: 120 },
     { field: "apellidoPaterno", headerName: "Apellido Paterno", width: 140 },
     { field: "apellidoMaterno", headerName: "Apellido Materno", width: 140 },
-    { field: "clave", headerName: "Clave", width: 100 },
     {
       field: "area",
       headerName: "Área",
@@ -179,6 +179,15 @@ export const empleadoConfig: EntityConfig<Empleado> = {
         return value.nombre || "N/A";
       },
     },
+      {
+          field: "deshabilitado",
+          headerName: "Estado",
+          width: 120,
+          valueGetter: (value) => {
+              if (!value || typeof value !== "object") return "Desconocido";
+              return value.deshabilitado ? "Deshabilitado" : "Habilitado";
+          }
+      }
   ],
   defaultValues: {},
 };

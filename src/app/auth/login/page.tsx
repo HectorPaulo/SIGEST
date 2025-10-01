@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider, useTheme } from "@/utils/context/ThemeContext/ThemeContext";
 import UpnSpinner from "@/components/public/Spinners/UpnSpinner/UpnSpinner";
 import { Alert, AlertTitle } from "@mui/material";
@@ -57,6 +57,18 @@ const PageContent: React.FC = () => {
 
         checkExistingAuth();
     }, [router]);
+
+    // Timeout para ocultar alertas después de 3 segundos
+    React.useEffect(() => {
+        if (alertMessage) {
+            const timeout = setTimeout(() => {
+                setAlertMessage(null);
+                setAlertType(null);
+            }, 3000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [alertMessage]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -126,6 +138,7 @@ const PageContent: React.FC = () => {
 
     return (
         <motion.div
+            className='min-h-screen flex flex-col justify-between'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -248,25 +261,59 @@ const PageContent: React.FC = () => {
                 </div>
             }
 
-            {alertMessage && alertType === "success" && (
-                <Alert severity="success">
-                    <AlertTitle>¡Éxito!</AlertTitle>
-                    {alertMessage}
-                </Alert>
-            )}
-            {alertMessage && alertType === "error" && (
-                <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    {alertMessage}
-                </Alert>
-            )}
-            {alertMessage && alertType === "attention" && (
-                <Alert severity="warning">
-                    <AlertTitle>Atención</AlertTitle>
-                    {alertMessage}
-                </Alert>
+            <AnimatePresence>
+                {alertMessage && (
+                    <motion.div
+                        className="fixed inset-0 flex justify-center items-center z-50"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {/* Fondo semitransparente */}
+                        <motion.div
+                            className="absolute inset-0 bg-opacity-50"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        />
 
-            )}
+                        {/* Contenedor de la alerta */}
+                        <motion.div
+                            className="max-w-md w-full mx-4 relative z-10"
+                            initial={{ scale: 0.7, opacity: 0, y: -50 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.7, opacity: 0, y: -50 }}
+                            transition={{
+                                duration: 0.4,
+                                ease: "easeOut",
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 20
+                            }}
+                        >
+                            {alertType === "success" && (
+                                <Alert severity="success">
+                                    <AlertTitle>¡Éxito!</AlertTitle>
+                                    {alertMessage}
+                                </Alert>
+                            )}
+                            {alertType === "error" && (
+                                <Alert severity="error">
+                                    <AlertTitle>Error</AlertTitle>
+                                    {alertMessage}
+                                </Alert>
+                            )}
+                            {alertType === "attention" && (
+                                <Alert severity="warning">
+                                    <AlertTitle>Atención</AlertTitle>
+                                    {alertMessage}
+                                </Alert>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.div>
     );
 };

@@ -95,18 +95,15 @@ export const logout = async (): Promise<void> => {
     // Intentar hacer logout en el servidor
     const token = localStorage.getItem("token");
     if (token) {
-      await axios.post("/auth/logout", { token });
+          localStorage.removeItem("token");
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("user");
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("refreshToken");
+          sessionStorage.removeItem("user");
     }
   } catch (error) {
     console.error("Error al hacer logout en el servidor:", error);
-  } finally {
-    // Limpiar ambos storages
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("refreshToken");
-    sessionStorage.removeItem("user");
   }
 };
 

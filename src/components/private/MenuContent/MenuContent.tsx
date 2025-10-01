@@ -16,6 +16,7 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import ApartmentRoundedIcon from '@mui/icons-material/ApartmentRounded';
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded';
 import ReceiptLongRoundedIcon from '@mui/icons-material/ReceiptLongRounded';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import {useRouter} from "next/navigation";
 
 const mainListItems = [
@@ -23,6 +24,7 @@ const mainListItems = [
     { text: 'Bitácora', icon: <FolderOpenIcon />, route: '/private/bitacora' },
     { text: 'Empleados', icon: <AssignmentIndIcon />, route: '/private/empleados' },
     { text: 'Roles', icon: <CommitTwoToneIcon />, route: '/private/roles' },
+    { text: 'Funciones', icon: <PsychologyIcon />, route: '/private/funciones' },
     { text: 'Áreas', icon: <ApartmentRoundedIcon />, route: '/private/areas' },
     { text: 'Inventario', icon: <Inventory2RoundedIcon />, route: '/private/inventarios' },
     { text: 'Vales', icon: <ReceiptLongRoundedIcon />, route: '/private/vales' },
