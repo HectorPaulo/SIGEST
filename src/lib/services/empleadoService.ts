@@ -1,5 +1,9 @@
 import type { Empleado, EmpleadoInsert } from "@/types/empleado";
-import type { DataService, ValidationResult } from "@/types/generic";
+import type {
+  DataService,
+  ValidationResult,
+  EntityInsert,
+} from "@/types/generic";
 import type {
   GridFilterModel,
   GridPaginationModel,
@@ -102,11 +106,32 @@ async function getMany({
 
 async function getOne(empleadoId: string): Promise<Empleado> {
   try {
+    console.log("=== DEBUG: Obteniendo empleado por ID ===");
+    console.log("ID solicitado:", empleadoId);
+
     const empleado = await GetEmpleadoById(parseInt(empleadoId));
-    return {
+
+    console.log("Respuesta completa del servidor:");
+    console.log(JSON.stringify(empleado, null, 2));
+
+    console.log("Verificando propiedades específicas:");
+    console.log("- area:", empleado.area);
+    console.log("- rol:", empleado.rol);
+    console.log("- Tipo de area:", typeof empleado.area);
+    console.log("- Tipo de rol:", typeof empleado.rol);
+
+    // Crear el objeto con los IDs extraídos para facilitar la edición
+    const empleadoWithIds = {
       ...empleado,
       id: String(empleado.id),
+      // Agregar los IDs para que los formularios de edición puedan usarlos
+      areaId: empleado.area?.id || null,
+      rolId: empleado.rol?.id || null,
     };
+
+    console.log("Empleado procesado con IDs:", empleadoWithIds);
+
+    return empleadoWithIds;
   } catch (error) {
     console.error("Error fetching empleado:", error);
     throw new Error("Empleado not found");

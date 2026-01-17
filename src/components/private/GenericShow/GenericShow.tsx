@@ -98,21 +98,48 @@ export default function GenericShow<T extends BaseEntity>({ config }: GenericSho
     }, [router, config.basePath]);
 
     const formatFieldValue = React.useCallback((field: FormFieldConfig, value: unknown) => {
+        console.log(`=== DEBUG: formatFieldValue ===`);
+        console.log(`Campo: ${field.name} (${field.type})`);
+        console.log(`Valor recibido:`, value);
+        console.log(`Tipo de valor:`, typeof value);
+
         if (value == null || value === undefined) {
+            console.log(`Valor es null/undefined, retornando '-'`);
             return '-';
         }
 
+        // Manejo especial para objetos anidados (area y rol)
+        if (field.name === 'area' || field.name === 'rol') {
+            if (typeof value === 'object' && value !== null) {
+                const result = (value as { nombre?: string }).nombre || '-';
+                console.log(`Objeto anidado procesado: ${result}`);
+                return result;
+            }
+            console.log(`Objeto anidado no válido, retornando '-'`);
+            return '-';
+        }
+
+        let result: string;
         switch (field.type) {
             case 'date':
-                return dayjs(value as string).format('MMMM D, YYYY');
+                result = dayjs(value as string).format('MMMM D, YYYY');
+                break;
             case 'checkbox':
-                return value ? 'Sí' : 'No';
+                result = value ? 'Sí' : 'No';
+                break;
             case 'select':
                 const option = field.options?.find(opt => opt.value === value);
-                return option ? option.label : String(value);
+                result = option ? option.label : String(value);
+                break;
+            case 'number':
+                result = String(value);
+                break;
             default:
-                return String(value);
+                result = String(value);
         }
+
+        console.log(`Resultado final: ${result}`);
+        return result;
     }, []);
 
     const renderShow = React.useMemo(() => {
@@ -144,7 +171,7 @@ export default function GenericShow<T extends BaseEntity>({ config }: GenericSho
         return item ? (
             <Box sx={{ flexGrow: 1, width: '100%' }}>
                 <Grid container spacing={2} sx={{ width: '100%' }}>
-                    {config.formFields.map((field) => (
+                    {(config.showFields || config.formFields).map((field) => (
                         <Grid
                             key={field.name}
                             size={field.gridSize || { xs: 12, sm: 6 }}
@@ -192,6 +219,7 @@ export default function GenericShow<T extends BaseEntity>({ config }: GenericSho
         error,
         item,
         config.formFields,
+        config.showFields,
         formatFieldValue,
         handleBack,
         handleEdit,

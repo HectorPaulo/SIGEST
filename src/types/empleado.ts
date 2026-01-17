@@ -26,6 +26,9 @@ export interface Empleado {
     deshabilitado: boolean;
   };
   deshabilitado: boolean;
+  // Campos adicionales para facilitar la edición
+  areaId?: number;
+  rolId?: number;
 }
 
 export interface EmpleadoRecibe {

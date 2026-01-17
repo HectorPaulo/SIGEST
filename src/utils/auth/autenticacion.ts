@@ -1,4 +1,5 @@
 import axios from "@/lib/axios";
+import { globalNotifications } from "@/utils/notifications/globalNotifications";
 
 export async function login(username: string, password: string) {
   try {
@@ -81,11 +82,33 @@ export async function login(username: string, password: string) {
     };
   } catch (error) {
     console.error("Error en login:", error);
-    if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
-      throw new Error(
-        "La peticion de inicio de sesion ha tardado demasiado tiempo. Intentalo de nuevo."
+
+    if (axios.isAxiosError(error)) {
+      if (error.code === "ECONNABORTED") {
+        const timeoutError = new Error(
+          "La petición de inicio de sesión ha tardado demasiado tiempo. Inténtalo de nuevo."
+        );
+        globalNotifications.error(
+          "Tiempo de espera agotado. La conexión tardó demasiado tiempo."
+        );
+        throw timeoutError;
+      } else if (error.response?.status === 401) {
+        globalNotifications.error(
+          "Credenciales incorrectas. Verifica tu usuario y contraseña."
+        );
+      } else if (error.response?.status >= 500) {
+        globalNotifications.error("Error del servidor. Inténtalo más tarde.");
+      } else {
+        globalNotifications.error(
+          "Error de conexión. Verifica tu conexión a internet."
+        );
+      }
+    } else {
+      globalNotifications.error(
+        "Error inesperado durante el inicio de sesión."
       );
     }
+
     throw error;
   }
 }
@@ -95,19 +118,21 @@ export const logout = async (): Promise<void> => {
     // Intentar hacer logout en el servidor
     const token = localStorage.getItem("token");
     if (token) {
-          localStorage.removeItem("token");
-          localStorage.removeItem("refreshToken");
-          localStorage.removeItem("user");
-          sessionStorage.removeItem("token");
-          sessionStorage.removeItem("refreshToken");
-          sessionStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("refreshToken");
+      sessionStorage.removeItem("user");
     }
-  } catch (error) {
-    console.error("Error al hacer logout en el servidor:", error);
+  } catch {
+    globalNotifications.warning(
+      "Hubo un problema al cerrar sesión en el servidor, pero se limpiaron los datos locales."
+    );
   }
 };
 
-// Función para validar token localmente (sin servidor para evitar ciclos)
+// * Función para validar token localmente
 export const validateToken = (): boolean => {
   if (typeof window === "undefined") return false;
 
@@ -119,7 +144,9 @@ export const validateToken = (): boolean => {
     // Validación básica del formato JWT
     const parts = token.split(".");
     if (parts.length !== 3) {
-      console.error("Token format invalid");
+      globalNotifications.error(
+        "El formato del token de sesión es inválido. Por favor, inicia sesión nuevamente."
+      );
       clearAllAuthData();
       return false;
     }
@@ -131,20 +158,26 @@ export const validateToken = (): boolean => {
 
       // Verificar si el token ha expirado
       if (payload.exp && payload.exp < currentTime) {
-        console.error("Token has expired");
+        globalNotifications.warning(
+          "Tu sesión ha expirado. Por favor, inicia sesión nuevamente."
+        );
         clearAllAuthData();
         return false;
       }
-    } catch (decodeError) {
-      console.error("Error decoding token:", decodeError);
+    } catch {
+      globalNotifications.error(
+        "Error al validar el token de sesión. Por favor, inicia sesión nuevamente."
+      );
       clearAllAuthData();
       return false;
     }
 
     // Si llegamos aquí, el token parece válido localmente
     return true;
-  } catch (error) {
-    console.error("Token validation failed:", error);
+  } catch {
+    globalNotifications.error(
+      "Error al validar la autenticación. Por favor, inicia sesión nuevamente."
+    );
     clearAllAuthData();
     return false;
   }
@@ -189,5 +222,5 @@ export const clearAllAuthData = (): void => {
   sessionStorage.removeItem("refreshToken");
   sessionStorage.removeItem("user");
 
-  console.log("Todos los datos de autenticación han sido limpiados");
+  globalNotifications.info("Datos de sesión limpiados correctamente.");
 };

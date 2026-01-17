@@ -60,6 +60,8 @@ export interface EntityConfig<T extends BaseEntity> {
   basePath: string;
   dataService: DataService<T>;
   formFields: FormFieldConfig[];
+  showFields?: FormFieldConfig[]; // Campos específicos para la vista de detalles
+  editFields?: FormFieldConfig[]; // Campos específicos para editar
   tableColumns: ColumnConfig[];
   defaultValues?: Partial<EntityInsert<T>>;
 }

@@ -54,7 +54,7 @@ export const GetAreaById = async (id: number) => {
 // Función para eliminar un área
 export const DeleteArea = async (id: string) => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    const url = `${process.env.NEXT_PUBLIC_DISABLE_URL}/area/deshabilitar?id=${id}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/area/deshabilitar?id=${id}`;
     if (!token) throw new Error('No hay ningun token');
     const response = await axios.delete(url, {
         headers: { Authorization: `Bearer ${token}` }

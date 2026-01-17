@@ -107,7 +107,7 @@ function GenericEditForm<T extends BaseEntity>({
     return (
         <GenericForm
             formState={formState}
-            formFields={config.formFields}
+            formFields={config.editFields || config.formFields}
             onFieldChange={handleFormFieldChange}
             onSubmit={handleFormSubmit}
             onReset={handleFormReset}

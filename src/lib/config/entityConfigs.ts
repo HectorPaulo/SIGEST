@@ -153,6 +153,91 @@ export const empleadoConfig: EntityConfig<Empleado> = {
       gridSize: { xs: 12, sm: 6 },
     },
   ],
+  showFields: [
+    {
+      name: "clave",
+      label: "Clave",
+      type: "text",
+      gridSize: { xs: 12, sm: 6 },
+    },
+    {
+      name: "nombre",
+      label: "Nombre",
+      type: "text",
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "apellidoPaterno",
+      label: "Apellido Paterno",
+      type: "text",
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "apellidoMaterno",
+      label: "Apellido Materno",
+      type: "text",
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "area",
+      label: "Área Asignada",
+      type: "text",
+      gridSize: { xs: 12, sm: 6 },
+    },
+    {
+      name: "rol",
+      label: "Rol Asignado",
+      type: "text",
+      gridSize: { xs: 12, sm: 6 },
+    },
+  ],
+  editFields: [
+    {
+      name: "clave",
+      label: "Clave",
+      type: "text",
+      required: true,
+      gridSize: { xs: 12, sm: 6 },
+    },
+    {
+      name: "nombre",
+      label: "Nombre",
+      type: "text",
+      required: true,
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "apellidoPaterno",
+      label: "Apellido Paterno",
+      type: "text",
+      required: true,
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "apellidoMaterno",
+      label: "Apellido Materno",
+      type: "text",
+      gridSize: { xs: 12, sm: 4 },
+    },
+    {
+      name: "areaId",
+      label: "Área Asignada",
+      type: "select",
+      required: true,
+      options: [],
+      optionsLoader: getAreaOptions,
+      gridSize: { xs: 12, sm: 6 },
+    },
+    {
+      name: "rolId",
+      label: "Rol Asignado",
+      type: "select",
+      required: true,
+      options: [],
+      optionsLoader: getRolOptions,
+      gridSize: { xs: 12, sm: 6 },
+    },
+  ],
   tableColumns: [
     { field: "id", headerName: "ID", width: 50 },
     { field: "clave", headerName: "Clave", width: 120 },
@@ -166,7 +251,7 @@ export const empleadoConfig: EntityConfig<Empleado> = {
       valueGetter: (value) => {
         // value is the area object directly
         if (!value || typeof value !== "object") return "N/A";
-        return value.nombre || "N/A";
+        return (value as { nombre?: string }).nombre || "N/A";
       },
     },
     {
@@ -176,18 +261,18 @@ export const empleadoConfig: EntityConfig<Empleado> = {
       valueGetter: (value) => {
         // value is the rol object directly
         if (!value || typeof value !== "object") return "N/A";
-        return value.nombre || "N/A";
+        return (value as { nombre?: string }).nombre || "N/A";
       },
     },
-      {
-          field: "deshabilitado",
-          headerName: "Estado",
-          width: 120,
-          valueGetter: (value) => {
-              if (!value || typeof value !== "object") return "Desconocido";
-              return value.deshabilitado ? "Deshabilitado" : "Habilitado";
-          }
-      }
+    {
+      field: "deshabilitado",
+      headerName: "Estado",
+      width: 120,
+      valueGetter: (value) => {
+        if (typeof value !== "boolean") return "Desconocido";
+        return value ? "Deshabilitado" : "Habilitado";
+      },
+    },
   ],
   defaultValues: {},
 };

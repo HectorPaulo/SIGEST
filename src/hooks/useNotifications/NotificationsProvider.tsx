@@ -12,6 +12,7 @@ import type { CloseReason } from '@mui/material/SpeedDial';
 import CloseIcon from '@mui/icons-material/Close';
 import useSlotProps from '@mui/utils/useSlotProps';
 import NotificationsContext from './NotificationsContext';
+import { globalNotifications } from '@/utils/notifications/globalNotifications';
 import type {
     CloseNotification,
     ShowNotification,
@@ -171,6 +172,15 @@ export default function NotificationsProvider(props: NotificationsProviderProps)
     }, []);
 
     const contextValue = React.useMemo(() => ({ show, close }), [show, close]);
+
+    // Conectar el sistema global de notificaciones
+    React.useEffect(() => {
+        const unsubscribe = globalNotifications.subscribe((message, options) => {
+            show(message, options || {});
+        });
+
+        return unsubscribe;
+    }, [show]);
 
     return (
         <RootPropsContext.Provider value={props}>

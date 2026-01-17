@@ -41,7 +41,7 @@ export const CreateEmpleado = async (data: EmpleadoInsert) => {
 export const UpdateEmpleado = async (id: number, data: Empleado) => {
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
-  const url = `${process.env.NEXT_PUBLIC_DISABLE_URL}/empleado/update?id=${id}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/empleado/update?id=${id}`;
   if (!token) throw new Error("No hay ningun token");
   const response = await axios.put(url, data, {
     headers: { Authorization: `Bearer ${token}` },
